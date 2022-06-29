@@ -16,7 +16,7 @@ function exibirQuizz (object) {
     
 }
 
-pegarQuizz();
+//pegarQuizz();
 
 
 
@@ -47,5 +47,41 @@ function erroNiveis () {
     }
     if (cont === 0) {
         msgErro();
+    }
+}
+
+
+/*TELA CRIAÇÃO DE QUIZZES*/ 
+
+let tituloCriarQuizz, urlCriarQuizz, qtdPerguntasCriarQuizz, qtdNiveisCriarQuizz;
+
+function prosseguirCriarPerguntas(){
+    let erro=0;
+    tituloCriarQuizz=document.querySelector(".tituloCriarQuizz").value
+    urlCriarQuizz=document.querySelector(".urlCriarQuizz").value.toLowerCase()
+    qtdPerguntasCriarQuizz=Number(document.querySelector(".qtdPerguntasCriarQuizz").value)
+    qtdNiveisCriarQuizz=Number(document.querySelector(".qtdNiveisCriarQuizz").value)
+
+    alert(urlCriarQuizz)
+
+    console.log(`${tituloCriarQuizz}, ${urlCriarQuizz}, ${qtdPerguntasCriarQuizz}, ${qtdNiveisCriarQuizz}`)
+    if (tituloCriarQuizz.length<20){
+        alert("Atenção! O título do quizz deve ter no mínimo 20 e no máximo 65 caracteres.")
+        erro++
+    }
+    if (urlCriarQuizz.slice(0,4)!="http"){
+        alert("Atenção! Insira uma url de imagem válida.")
+        erro++
+    }
+    if (isNaN(qtdPerguntasCriarQuizz) || qtdPerguntasCriarQuizz<3){
+        alert("Atenção! Para a quantidade de perguntas, digite um número maior do que 2.")
+        erro++
+    }
+    if (isNaN(qtdNiveisCriarQuizz) || qtdNiveisCriarQuizz<2){
+        alert("Atenção! Para a quantidade de níveis, digite um número maior do que 1.")
+        erro++
+    }
+    if (erro==0){
+        alert("prosseguir")
     }
 }
