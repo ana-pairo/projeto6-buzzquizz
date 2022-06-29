@@ -85,3 +85,7 @@ function prosseguirCriarPerguntas(){
         alert("prosseguir")
     }
 }
+
+.escondido {
+    display: none;
+}
