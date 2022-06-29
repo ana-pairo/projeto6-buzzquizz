@@ -17,3 +17,35 @@ function exibirQuizz (object) {
 }
 
 pegarQuizz();
+
+
+
+function msgErro () {
+    alert("Preencha os dados corretamente!");
+}
+
+function erroNiveis () {
+    let tituloNivel = document.querySelector(".tituloNivel").value;
+    let acertos = document.querySelector(".acertos").value;
+    let url = document.querySelector(".url").value;
+    let descricao = document.querySelector(".descricao").value;
+    
+    if(tituloNivel.length < 10) {
+        msgErro();
+    }
+    if(isNaN(acertos) || acertos < 0 || acertos > 100) {
+        msgErro();
+    }
+    if(descricao.length < 30) {
+        msgErro();
+    }
+    let cont=0;
+    for (let i = 0; i < levels.lenght; i++) {
+        if(levels.minValue === 0) {
+            cont++;
+        }
+    }
+    if (cont === 0) {
+        msgErro();
+    }
+}
