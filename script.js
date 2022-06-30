@@ -7,16 +7,18 @@ function pegarQuizzes () {
 function exibirQuizzes (object) {
     quizzServer = object.data;
     let quizzes = document.querySelector(".quadroQuizzes");
+    let container = document.querySelector(".container");
     quizzes.innerHTML = "";
+    container.classList.remove("escondido");
     for(let i = 0; i < quizzServer.length; i++) {
         quizzes.innerHTML += `<div class="quizz" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(${quizzServer[i].image});">
-        <div class="tituloQuizz">${quizzServer[i].title}</div>
+        <div class="nomeQuizz">${quizzServer[i].title}</div>
     </div>`;
     }
     
 }
 
-// pegarQuizz();
+ //pegarQuizz();
 
 
 
@@ -37,6 +39,9 @@ function erroNiveis () {
         msgErro();
     }
     if(descricao.length < 30) {
+        msgErro();
+    }
+    if (url.slice(0,4)!="http"){
         msgErro();
     }
     let cont=0;
@@ -303,4 +308,128 @@ function escolherAlternativa(divEscolhida) {
             divAlternativas.querySelector(".respostaOculta").classList.remove("respostaOculta");
         }
     }
+}
+
+
+
+
+//TELA DE NÍVEIS
+
+function renderizarNiveis (){
+    let niveis = document.querySelector(".niveis");
+    niveis.innerHTML = "";
+    qtdNiveisCriarQuizz = 3;
+    for (let i = 0; i < qtdNiveisCriarQuizz; i++) {
+        niveis.innerHTML += 
+        `<div class="nivel">
+            <span>Nível ${i+1}</span>
+            <input class ="tituloNivel ${i+1}" type="text" placeholder="Título do nível">
+            <input class ="acertos ${i+1}" type="text" placeholder="% de acerto mínima">
+            <input class ="url ${i+1}" type="text" placeholder="URL da imagem do nível">
+            <textarea class ="descricao ${i+1}" name="" id="" cols="30" rows="10" placeholder="Descrição do nível"></textarea>
+        </div>`;
+    }
+}
+
+function finalizarQuizz () {
+    let objQuizz = {
+        title: tituloCriarQuizz,
+        image: urlCriarQuizz,
+        questions: [
+            {
+                title: document.querySelector(".textoPergunta perg${i+1}").value,
+                color: document.querySelector(".urlPergunta perg${i+1}").value,
+                answers: [
+                    {
+                        text: document.querySelector(".respCorreta perg${i+1}").value,
+                        image: document.querySelector(".urlRespCorreta perg${i+1}").value,
+                        isCorrectAnswer: true
+                    },
+                    {
+                        text: document.querySelector(".respIncorreta1 perg${i+1}").value,
+                        image: document.querySelector(".urlRespIncorreta1 perg${i+1}").value,
+                        isCorrectAnswer: false
+                    }
+                ]
+            },
+            {
+                title: "Título da pergunta 2",
+                color: "#123456",
+                answers: [
+                    {
+                        text: "Texto da resposta 1",
+                        image: "https://http.cat/411.jpg",
+                        isCorrectAnswer: true
+                    },
+                    {
+                        text: "Texto da resposta 2",
+                        image: "https://http.cat/412.jpg",
+                        isCorrectAnswer: false
+                    }
+                ]
+            },
+            {
+                title: "Título da pergunta 3",
+                color: "#123456",
+                answers: [
+                    {
+                        text: "Texto da resposta 1",
+                        image: "https://http.cat/411.jpg",
+                        isCorrectAnswer: true
+                    },
+                    {
+                        text: "Texto da resposta 2",
+                        image: "https://http.cat/412.jpg",
+                        isCorrectAnswer: false
+                    }
+                ]
+            }
+        ],
+        levels: [
+            {
+                title: document.querySelector(".tituloNivel ${i+1}").value,
+                image: document.querySelector(".url ${i+1}").value,
+                text: document.querySelector(".descricao ${i+1}").value,
+                minValue: document.querySelector(".acertos ${i+1}").value
+            },
+            {
+                title: "Título do nível 2",
+                image: "https://http.cat/412.jpg",
+                text: "Descrição do nível 2",
+                minValue: 50
+            }
+        ]
+    }
+    const promise = axios.post("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes", objQuizz);
+}
+
+
+
+
+//TELA DE SUCESSO DO QUIZZ
+
+function voltarHome () {
+    let sucesso = document.querySelector(".telaSucesso");
+    sucesso.innerHTML = "";
+    sucesso.classList.add("escondido");
+    pegarQuizz();
+}
+
+function acessarQuizz () {
+    let sucesso = document.querySelector(".telaSucesso");
+    sucesso.innerHTML = "";
+    sucesso.classList.add("escondido");
+    let quizzPage = document.querySelector(".quizzPage");
+    quizzPage.classList.remove("escondido");
+}
+
+
+
+//BOTÃO CRIAR QUIZZ
+
+function telaCriacao () {
+    let homepage = document.querySelector(".container");
+    homepage.innerHTML = "";
+    homepage.classList.add("escondido");
+    document.querySelector(".criarQuizz1").classList.remove("escondido");
 }
