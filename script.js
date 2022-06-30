@@ -7,10 +7,12 @@ function pegarQuizz () {
 function exibirQuizz (object) {
     quizzServer = object.data;
     let quizzes = document.querySelector(".quadroQuizzes");
+    let container = document.querySelector(".container");
     quizzes.innerHTML = "";
+    container.classList.remove("escondido");
     for(let i = 0; i < quizzServer.length; i++) {
         quizzes.innerHTML += `<div class="quizz" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(${quizzServer[i].image});">
-        <div class="tituloQuizz">${quizzServer[i].title}</div>
+        <div class="nomeQuizz">${quizzServer[i].title}</div>
     </div>`;
     }
     
@@ -223,3 +225,25 @@ function abrirCriarNiveisQuizz(){
 // TELA DE QUIZZ
 
 // function pegarQuizzPorID
+
+
+
+
+
+
+//TELA DE SUCESSO DO QUIZZ
+
+function voltarHome () {
+    let sucesso = document.querySelector(".telaSucesso");
+    sucesso.innerHTML = "";
+    sucesso.classList.add("escondido");
+    pegarQuizz();
+}
+
+function acessarQuizz () {
+    let sucesso = document.querySelector(".telaSucesso");
+    sucesso.innerHTML = "";
+    sucesso.classList.add("escondido");
+    let quizzPage = document.querySelector(".quizzPage");
+    quizzPage.classList.remove("escondido");
+}
