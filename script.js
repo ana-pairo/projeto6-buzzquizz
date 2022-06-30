@@ -311,6 +311,7 @@ function escolherAlternativa(divEscolhida) {
     }
 
     let proximaPergunta = document.querySelector(".aResponder")
+
     setTimeout(function (){proximaPergunta.scrollIntoView({block: "center", behavior: "smooth"});},2000)
 
 }
