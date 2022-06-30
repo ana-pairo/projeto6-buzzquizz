@@ -92,10 +92,23 @@
     font-size: 20px;
     color: #B9B9B9;
     display: flex;
+    flex-direction: column;
     align-items: center;
     text-align: center;
     margin: auto auto;
 
+}
+
+.btnQuizzUsuario {
+    width: 150px;
+    height: 40px;
+    background-color: #fafafa;
+    color: #EC362D;
+    border: 1px dashed #EC362D;
+    border-radius: 50px;
+    margin-top: 20px;
+    font-size: 20px;
+    cursor: pointer;
 }
 
 .quizz, .novoQuizz {
@@ -123,7 +136,7 @@
     margin: 0 auto;
 }
 
-.botaoAcessarQuiz {
+.botaoAcessarQuizz, .botaoFinalizarQuizz {
     width: 220px;
     height: 45px;
     background-color: #EC362D;
@@ -135,6 +148,7 @@
     font-size: 18px;
     border-radius: 10px;
     cursor: pointer;
+    border: none;
 }
 
 .botaoHome {
@@ -149,6 +163,7 @@
     font-size: 18px;
     border-radius: 10px;
     cursor: pointer;
+    border: none;
 }
 
 
@@ -160,7 +175,7 @@
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
-    margin-top: 70px;
+    margin-top: 55px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -169,6 +184,7 @@
 .niveis {
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 .nivel {
@@ -189,6 +205,13 @@
     margin: 15px auto;
     width: 565px;
     height: 45px;
+    border: 1px solid #d1d1d1;
+    border-radius: 5px;
+}
+
+.nivel textarea {
+    border: 1px solid #d1d1d1;
+    border-radius: 5px;
 }
 
 input::placeholder {

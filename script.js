@@ -41,6 +41,9 @@ function erroNiveis () {
     if(descricao.length < 30) {
         msgErro();
     }
+    if (url.slice(0,4)!="http"){
+        msgErro();
+    }
     let cont=0;
     for (let i = 0; i < levels.lenght; i++) {
         if(levels.minValue === 0) {
@@ -246,4 +249,15 @@ function acessarQuizz () {
     sucesso.classList.add("escondido");
     let quizzPage = document.querySelector(".quizzPage");
     quizzPage.classList.remove("escondido");
+}
+
+
+
+//BOTÃO CRIAR QUIZZ
+
+function telaCriacao () {
+    let homepage = document.querySelector(".container");
+    homepage.innerHTML = "";
+    homepage.classList.add("escondido");
+    document.querySelector(".criarQuizz1").classList.remove("escondido");
 }
