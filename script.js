@@ -1,10 +1,10 @@
-function pegarQuizz () {
+function pegarQuizzes () {
     const promise = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes");
-    promise.then(exibirQuizz);
+    promise.then(exibirQuizzes);
 }
 
 
-function exibirQuizz (object) {
+function exibirQuizzes (object) {
     quizzServer = object.data;
     let quizzes = document.querySelector(".quadroQuizzes");
     let container = document.querySelector(".container");
@@ -227,7 +227,88 @@ function abrirCriarNiveisQuizz(){
 
 // TELA DE QUIZZ
 
-// function pegarQuizzPorID
+// const promise = axios.get("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes/1");
+// promise.then(abrirQuizz);
+
+function requisitarQuizz(IDdoQuizz) {
+    const promise = axios.get("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes/1");
+    promise.then(abrirQuizz);
+    promisse.catch(erroAbrirQuizz);
+}
+
+function abrirQuizz (resposta){
+
+    let containerDePerguntas = document.querySelector(".quizzPage");
+    containerDePerguntas.classList.remove("escondido");
+
+    let objetoQuizz = resposta.data;
+    let perguntas = objetoQuizz.questions;
+
+    containerDePerguntas.innerHTML = 
+    `<div class="capa">
+        <img src='${objetoQuizz.image}'>
+        <div class="tituloQuizz">${objetoQuizz.title}</div>
+        <div class="camada"></div>
+    </div>`;
+
+    for (let i=0; i<perguntas.length; i++){
+        let template = ""
+
+        let template1 =
+        `<div class="pergunta">
+            <div class="enunciado cor${i}">${perguntas[i].title}</div>
+            <div class="alternativas">`;
+
+        template += template1;
+
+        let alternativas = perguntas[i].answers;
+        alternativas.sort(comparador);
+
+        for(let j=0; j<alternativas.length; j++){
+           
+            let alternativa = alternativas[j];
+            let marcadorRespostaCorreta = "";
+
+            if(alternativa.isCorrectAnswer === true){
+                marcadorRespostaCorreta =  "alternativaCerta";
+            } else {
+                marcadorRespostaCorreta =  "alternativaErrada";
+            }
+
+            let template2 = 
+            `<div class="respostaOculta ${marcadorRespostaCorreta}" onclick="escolherAlternativa(this);">
+                <img src="${alternativa.image}">
+                ${alternativa.text}
+            </div>`
+
+            template += template2;
+        }
+
+        template += `</div></div>`;
+        containerDePerguntas.innerHTML += template;
+        document.querySelector(`.cor${i}`).style.backgroundColor=`${perguntas[i].color}`;
+    }
+
+    
+}
+
+function comparador() {
+    return Math.random() - 0.5;
+}
+
+function escolherAlternativa(divEscolhida) {
+    let divAlternativas = divEscolhida.parentElement;
+    
+
+    if(divAlternativas.querySelector(".alternativaSelecionada")){
+        return
+    } else {
+        divEscolhida.classList.add("alternativaSelecionada")
+        while(divAlternativas.querySelector(".respostaOculta")){
+            divAlternativas.querySelector(".respostaOculta").classList.remove("respostaOculta");
+        }
+    }
+}
 
 
 
