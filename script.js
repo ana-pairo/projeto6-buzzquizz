@@ -16,7 +16,7 @@ function exibirQuizz (object) {
     
 }
 
-//pegarQuizz();
+// pegarQuizz();
 
 
 
@@ -211,7 +211,7 @@ function prosseguirCriarNiveis(){
     
 }
 
-function abrirCriarNiveis(){
+function abrirCriarNiveisQuizz(){
 
     document.querySelector(".criarQuizz2").classList.add("escondido")
 
@@ -219,3 +219,7 @@ function abrirCriarNiveis(){
     //document.querySelector(".criarNiveis").classList.remove("escondido")
 
 }
+
+// TELA DE QUIZZ
+
+// function pegarQuizzPorID
