@@ -51,7 +51,7 @@ function erroNiveis () {
 }
 
 
-/*TELA CRIAÇÃO DE QUIZZES*/ 
+/*TELA 1 CRIAÇÃO DE QUIZZES*/ 
 
 let tituloCriarQuizz, urlCriarQuizz, qtdPerguntasCriarQuizz, qtdNiveisCriarQuizz;
 
@@ -62,9 +62,6 @@ function prosseguirCriarPerguntas(){
     qtdPerguntasCriarQuizz=Number(document.querySelector(".qtdPerguntasCriarQuizz").value)
     qtdNiveisCriarQuizz=Number(document.querySelector(".qtdNiveisCriarQuizz").value)
 
-    alert(urlCriarQuizz)
-
-    console.log(`${tituloCriarQuizz}, ${urlCriarQuizz}, ${qtdPerguntasCriarQuizz}, ${qtdNiveisCriarQuizz}`)
     if (tituloCriarQuizz.length<20){
         alert("Atenção! O título do quizz deve ter no mínimo 20 e no máximo 65 caracteres.")
         erro++
@@ -82,10 +79,143 @@ function prosseguirCriarPerguntas(){
         erro++
     }
     if (erro==0){
-        alert("prosseguir")
+        abrirCriarPerguntasQuizz();
     }
 }
 
-.escondido {
-    display: none;
+/*TELA 2 CRIAÇÃO DE QUIZZES*/ 
+
+function abrirCriarPerguntasQuizz(){
+    
+    document.querySelector(".criarQuizz1").classList.add("escondido")
+    document.querySelector(".criarQuizz2").classList.remove("escondido")
+
+    for (let i=3; i<qtdPerguntasCriarQuizz;i++){
+
+        document.querySelector(".criarQuizz2").innerHTML+=`<div class="criarPergunta perg${i+1}">
+        <div class="criarPerguntaMaximizado escondido">
+            <h1>Pergunta ${i+1}</h1>
+            <input class="textoPergunta perg${i+1}" type="text" placeholder="Texto da pergunta">
+            <input class="urlPergunta perg${i+1}" type="text" placeholder="Cor de fundo da pergunta">
+            <h1>Resposta correta</h1>
+            <input class="respCorreta perg${i+1}" type="text" placeholder="Resposta correta">
+            <input class="urlRespCorreta perg${i+1}" type="text" placeholder="URL da imagem">
+            <h1>Respostas incorretas</h1>
+            <input class="respIncorreta1 perg${i+1}" type="text" placeholder="Resposta incorreta 1">
+            <input class="urlRespIncorreta1 perg${i+1}" type="text" placeholder="URL da imagem 1">
+            <input class="respIncorreta2 perg${i+1}" type="text" placeholder="Resposta incorreta 2">
+            <input class="urlRespIncorreta2 perg${i+1}" type="text" placeholder="URL da imagem 2">
+            <input class="respIncorreta3 perg${i+1}" type="text" placeholder="Resposta incorreta 3">
+            <input class="urlRespIncorreta3 perg${i+1}" type="text" placeholder="URL da imagem 3">
+        </div>
+        <div class="criarPerguntaMinimizado">
+            <h1>Pergunta ${i+1}</h1>
+            <img src="./imgs/icon-edit.svg" onclick="maximizarPergunta(this)"/>
+        </div>
+    </div>`
+
+    }
+
+    document.querySelector(".criarQuizz2").innerHTML+=`<div class="botaoCriarQuizz2" onclick="prosseguirCriarNiveis()">
+    Prosseguir pra criar níveis
+</div>`
+
+}
+
+function maximizarPergunta(elemento){
+
+    document.querySelector(".criarPerguntaMaximizado:not(.escondido)").classList.add("escondido")
+    document.querySelector(".criarPerguntaMinimizado.escondido").classList.remove("escondido")
+    elemento.parentElement.parentElement.firstElementChild.classList.remove("escondido")
+    elemento.parentElement.classList.add("escondido")
+
+}
+
+function prosseguirCriarNiveis(){
+
+    //Apagar essa linha depois
+    qtdPerguntasCriarQuizz=3
+    let erro=0;
+    let a=0;
+    let textoPergunta, corPergunta, respCorreta, urlRespCorreta, respIncorreta1, urlRespIncorreta1, respIncorreta2, urlRespIncorreta2, respIncorreta3, urlRespIncorreta3;
+
+    for (let i=0; i<qtdPerguntasCriarQuizz; i++){
+
+        textoPergunta=document.querySelector(`.textoPergunta.perg${i+1}`).value;
+        corPergunta=document.querySelector(`.corPergunta.perg${i+1}`).value;
+        respCorreta=document.querySelector(`.respCorreta.perg${i+1}`).value;
+        urlRespCorreta=document.querySelector(`.urlRespCorreta.perg${i+1}`).value;
+        respIncorreta1=document.querySelector(`.respIncorreta1.perg${i+1}`).value;
+        urlRespIncorreta1=document.querySelector(`.urlRespIncorreta1.perg${i+1}`).value;
+        respIncorreta2=document.querySelector(`.respIncorreta2.perg${i+1}`).value;
+        urlRespIncorreta2=document.querySelector(`.urlRespIncorreta2.perg${i+1}`).value;
+        respIncorreta3=document.querySelector(`.respIncorreta3.perg${i+1}`).value;
+        urlRespIncorreta3=document.querySelector(`.urlRespIncorreta3.perg${i+1}`).value;
+
+        if (textoPergunta.length<20){
+            alert(`Atenção! O texto da Pergunta ${i+1} deve ter no mínimo 20 caracteres.`)
+            erro++
+        }
+        else if (corPergunta.slice(0,1)!="#" || corPergunta.length!==7){
+            //Faltou fazer a verificação pra cada caracter depois do # se é uma letra de A a F ou 
+            //se é um número
+            alert(`Atenção! Insira uma cor válida para o fundo da Pergunta ${i+1}. Ex: #FAFAFA.`)
+            erro++
+        }
+        else if (respCorreta===""){
+            alert(`Atenção! Insira a resposta correta para a Pergunta ${i+1}.`)
+            erro++
+        }
+        else if (urlRespCorreta.slice(0,4)!="http"){
+            alert(`Atenção! Insira uma url de imagem válida para a resposta correta da Pergunta ${i+1}.`)
+            erro++
+        }
+        else if (respIncorreta1===""){
+            alert(`Atenção! Digite a resposta incorreta 1 para a Pergunta ${i+1}.`)
+            erro++
+        }
+        else if (urlRespIncorreta1.slice(0,4)!="http"){
+            alert(`Atenção! Insira uma url de imagem válida para a resposta incorreta 1 da Pergunta ${i+1}.`)
+            erro++
+        }
+        else if ((respIncorreta2==="" && urlRespIncorreta2!=="")||(respIncorreta2!=="" && urlRespIncorreta2==="")){
+            alert(`Atenção! Você só preencheu uma informação da resposta incorreta 2 da Pergunta ${i+1}. Preencha as duas ou deixe ambas vazias para prosseguir.`)
+            erro++
+        }
+        else if ((respIncorreta3!=="" && respIncorreta2==="")||(urlRespIncorreta3!=="" && respIncorreta2==="")){
+            alert(`Atenção! Na Pergunta ${i+1} você deve preencher completamente os dados na resposta incorreta 2 para então poder cadastrar a resposta incorreta 3. Se preferir, deixe ambas totalmente vazias.`)
+            erro++
+        }
+        else if ((respIncorreta3==="" && urlRespIncorreta3!=="")||(respIncorreta3!=="" && urlRespIncorreta3==="")){
+            alert(`Atenção! Você só preencheu uma informação da resposta incorreta 3 da Pergunta ${i+1}. Preencha as duas ou deixe ambas vazias para prosseguir.`)
+            erro++
+        }
+        else if (urlRespIncorreta2!=="" && urlRespIncorreta2.slice(0,4)!="http"){
+            alert(`Atenção! Foi digitado uma URL de imagem inválida na resposta incorreta 2 da Pergunta ${i+1}. Corrija para prosseguir`)
+            erro++
+        }
+        else if (urlRespIncorreta3!=="" && urlRespIncorreta3.slice(0,4)!="http"){
+            alert(`Atenção! Foi digitado uma URL de imagem inválida na resposta incorreta 2 da Pergunta ${i+1}. Corrija para prosseguir`)
+            erro++
+        }
+        if (erro==0){
+            //Criar o objeto com as informacoes da pergunta i+1 e dar push num objeto maior pra todo o quizz
+            a+=1
+        }
+
+    }
+
+    if (a===3){
+        abrirCriarNiveisQuizz()
+    }
+    
+}
+
+function abrirCriarNiveis(){
+
+    document.querySelector(".criarQuizz2").classList.add("escondido")
+
+    //Editar linha abaixo pra fazer aparecer a tela de Criar Niveis
+    //document.querySelector(".criarNiveis").classList.remove("escondido")
+
 }

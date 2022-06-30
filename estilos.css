@@ -70,6 +70,7 @@
     background-size: 100% 100%;
     
 }
+
 .tituloQuizz {
     color: #ffffff;
     text-align: center;
@@ -148,18 +149,18 @@ textarea::placeholder {
     color: #B9B9B9
 }
 
-/*TELA CRIAÇÃO DE QUIZZES*/ 
+/*TELA CRIAÇÃO DE QUIZZES - INFOS BASICAS*/ 
 
-.criarQuizz {
+.criarQuizz1 {
     padding-top: 69px;
     background-color: #FAFAFA;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vw;
+    height: 100%;
 }
 
-.criarQuizz h1{
+.criarQuizz1 h1{
     margin: 71px auto 27px auto;
     font-family: 'Roboto', sans-serif;
     font-style: normal;
@@ -174,8 +175,7 @@ textarea::placeholder {
     flex-direction: column;
     align-items: center;
     padding-top: 21px;
-    padding-bottom: 24px;
-    margin-bottom: 85px;
+    padding-bottom: 15px;
 }
 
 .infos input {
@@ -198,8 +198,107 @@ textarea::placeholder {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 85px;
+    margin-bottom: 170px;
 }
 
+.botaoCriarQuizz:hover{
+    cursor: pointer;
+}
+
+/*TELA CRIAÇÃO DE QUIZZES - PERGUNTAS*/ 
+
+.criarQuizz2{
+    padding-top: 69px;
+    background-color: #FAFAFA;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+.criarQuizz2 h1{
+    margin: 71px auto 27px auto;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.criarPergunta {
+    width: 600px;
+}
+
+.criarPerguntaMaximizado{
+    background-color: #FFFFFF;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 27px;
+    margin-bottom: 24px;
+}
+
+.criarPerguntaMaximizado h1{
+    margin: 27px auto 12px 17px;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.criarPerguntaMinimizado{
+    background-color: #FFFFFF;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 21px 20px 24px 20px;
+    margin-bottom: 24px;
+}
+
+.criarPerguntaMinimizado img{
+    height: 25px;
+}
+
+.criarPerguntaMinimizado img:hover{
+    cursor: pointer;
+}
+
+.criarPerguntaMinimizado h1{
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.criarPergunta input {
+    margin: 0 auto 9px auto;
+    width: 564px;
+    height: 46px;
+    border-radius: 5px;
+    border: 1px solid #D1D1D1;
+}
+
+.botaoCriarQuizz2{
+    background-color: #EC362D;
+    color: #FFF5F4;
+    width: 370px;
+    height: 54px;
+    border-radius: 15px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 21px;
+    font-weight: 400;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 85px;
+    margin-bottom: 60px;
+}
+
+.botaoCriarQuizz2:hover{
+    cursor: pointer;
+}
 
 /*AJUSTE PARA MOBILE*/
 
