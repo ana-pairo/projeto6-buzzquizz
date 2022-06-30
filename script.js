@@ -60,6 +60,7 @@ function erroNiveis () {
 
 let tituloCriarQuizz, urlCriarQuizz, qtdPerguntasCriarQuizz, qtdNiveisCriarQuizz;
 
+
 function prosseguirCriarPerguntas(){
     let erro=0;
     tituloCriarQuizz=document.querySelector(".tituloCriarQuizz").value
@@ -67,21 +68,23 @@ function prosseguirCriarPerguntas(){
     qtdPerguntasCriarQuizz=Number(document.querySelector(".qtdPerguntasCriarQuizz").value)
     qtdNiveisCriarQuizz=Number(document.querySelector(".qtdNiveisCriarQuizz").value)
 
-    if (tituloCriarQuizz.length<20){
+    if (tituloCriarQuizz.length<20 || tituloCriarQuizz.length>65){
         alert("Atenção! O título do quizz deve ter no mínimo 20 e no máximo 65 caracteres.")
         erro++
     }
-    if (urlCriarQuizz.slice(0,4)!="http"){
-        alert("Atenção! Insira uma url de imagem válida.")
-        erro++
+    else if (urlCriarQuizz.slice(0,4)!="http"){
+        alert("Atenção! Insira uma url de imagem válida.");
+        erro++;
     }
-    if (isNaN(qtdPerguntasCriarQuizz) || qtdPerguntasCriarQuizz<3){
-        alert("Atenção! Para a quantidade de perguntas, digite um número maior do que 2.")
-        erro++
+    else if (isNaN(qtdPerguntasCriarQuizz) || qtdPerguntasCriarQuizz<3){
+        alert("Atenção! O seu quizz deve ter pelo menos 3 perguntas.");
+        document.querySelector(".qtdPerguntasCriarQuizz").value="";
+        erro++;
     }
-    if (isNaN(qtdNiveisCriarQuizz) || qtdNiveisCriarQuizz<2){
-        alert("Atenção! Para a quantidade de níveis, digite um número maior do que 1.")
-        erro++
+    else if (isNaN(qtdNiveisCriarQuizz) || qtdNiveisCriarQuizz<2){
+        alert("Atenção! Você deve criar pelo menos 2 níveis para o seu quizz.");
+        document.querySelector(".qtdNiveisCriarQuizz").value="";
+        erro++;
     }
     if (erro==0){
         abrirCriarPerguntasQuizz();
@@ -101,7 +104,7 @@ function abrirCriarPerguntasQuizz(){
         <div class="criarPerguntaMaximizado escondido">
             <h1>Pergunta ${i+1}</h1>
             <input class="textoPergunta perg${i+1}" type="text" placeholder="Texto da pergunta">
-            <input class="urlPergunta perg${i+1}" type="text" placeholder="Cor de fundo da pergunta">
+            <input class="corPergunta perg${i+1}" type="text" placeholder="Cor de fundo da pergunta">
             <h1>Resposta correta</h1>
             <input class="respCorreta perg${i+1}" type="text" placeholder="Resposta correta">
             <input class="urlRespCorreta perg${i+1}" type="text" placeholder="URL da imagem">
@@ -139,7 +142,6 @@ function maximizarPergunta(elemento){
 function prosseguirCriarNiveis(){
 
     //Apagar essa linha depois
-    qtdPerguntasCriarQuizz=3
     let erro=0;
     let a=0;
     let textoPergunta, corPergunta, respCorreta, urlRespCorreta, respIncorreta1, urlRespIncorreta1, respIncorreta2, urlRespIncorreta2, respIncorreta3, urlRespIncorreta3;
@@ -200,7 +202,7 @@ function prosseguirCriarNiveis(){
             erro++
         }
         else if (urlRespIncorreta3!=="" && urlRespIncorreta3.slice(0,4)!="http"){
-            alert(`Atenção! Foi digitado uma URL de imagem inválida na resposta incorreta 2 da Pergunta ${i+1}. Corrija para prosseguir`)
+            alert(`Atenção! Foi digitado uma URL de imagem inválida na resposta incorreta 3 da Pergunta ${i+1}. Corrija para prosseguir`)
             erro++
         }
         if (erro==0){
@@ -210,7 +212,7 @@ function prosseguirCriarNiveis(){
 
     }
 
-    if (a===3){
+    if (a===qtdPerguntasCriarQuizz){
         abrirCriarNiveisQuizz()
     }
     
@@ -219,9 +221,7 @@ function prosseguirCriarNiveis(){
 function abrirCriarNiveisQuizz(){
 
     document.querySelector(".criarQuizz2").classList.add("escondido")
-
-    //Editar linha abaixo pra fazer aparecer a tela de Criar Niveis
-    //document.querySelector(".criarNiveis").classList.remove("escondido")
+    document.querySelector(".telaNiveis").classList.remove("escondido")
 
 }
 
@@ -256,17 +256,17 @@ function finalizarQuizz () {
         image: urlCriarQuizz,
         questions: [
             {
-                title: document.querySelector(".textoPergunta perg${i+1}").value,
-                color: document.querySelector(".urlPergunta perg${i+1}").value,
+                title: document.querySelector(".textoPergunta.perg1").value,
+                color: document.querySelector(".corPergunta.perg1").value,
                 answers: [
                     {
-                        text: document.querySelector(".respCorreta perg${i+1}").value,
-                        image: document.querySelector(".urlRespCorreta perg${i+1}").value,
+                        text: document.querySelector(".respCorreta.perg1").value,
+                        image: document.querySelector(".urlRespCorreta.perg1").value,
                         isCorrectAnswer: true
                     },
                     {
-                        text: document.querySelector(".respIncorreta1 perg${i+1}").value,
-                        image: document.querySelector(".urlRespIncorreta1 perg${i+1}").value,
+                        text: document.querySelector(".respIncorreta1.perg1").value,
+                        image: document.querySelector(".urlRespIncorreta1.perg1").value,
                         isCorrectAnswer: false
                     }
                 ]
@@ -306,10 +306,10 @@ function finalizarQuizz () {
         ],
         levels: [
             {
-                title: document.querySelector(".tituloNivel ${i+1}").value,
-                image: document.querySelector(".url ${i+1}").value,
-                text: document.querySelector(".descricao ${i+1}").value,
-                minValue: document.querySelector(".acertos ${i+1}").value
+                title: document.querySelector(".tituloNivel.1").value,
+                image: document.querySelector(".url.1").value,
+                text: document.querySelector(".descricao.1").value,
+                minValue: document.querySelector(".acertos.1").value
             },
             {
                 title: "Título do nível 2",
