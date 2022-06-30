@@ -255,7 +255,7 @@ function abrirQuizz (resposta){
         let template = ""
 
         let template1 =
-        `<div class="pergunta">
+        `<div class="pergunta aResponder">
             <div class="enunciado cor${i}">${perguntas[i].title}</div>
             <div class="alternativas">`;
 
@@ -298,6 +298,7 @@ function comparador() {
 
 function escolherAlternativa(divEscolhida) {
     let divAlternativas = divEscolhida.parentElement;
+    divAlternativas.parentElement.classList.remove("aResponder");
     
 
     if(divAlternativas.querySelector(".alternativaSelecionada")){
@@ -308,6 +309,10 @@ function escolherAlternativa(divEscolhida) {
             divAlternativas.querySelector(".respostaOculta").classList.remove("respostaOculta");
         }
     }
+
+    let proximaPergunta = document.querySelector(".aResponder")
+    setTimeout(function (){proximaPergunta.scrollIntoView({block: "center", behavior: "smooth"});},2000)
+
 }
 
 
