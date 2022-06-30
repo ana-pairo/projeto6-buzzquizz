@@ -16,7 +16,7 @@ function exibirQuizz (object) {
     
 }
 
-//pegarQuizz();
+// pegarQuizz();
 
 
 
@@ -86,6 +86,7 @@ function prosseguirCriarPerguntas(){
     }
 }
 
-.escondido {
-    display: none;
-}
+
+// TELA DE QUIZZ
+
+// function pegarQuizzPorID
