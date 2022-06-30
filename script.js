@@ -18,7 +18,7 @@ function exibirQuizzes (object) {
     
 }
 
- //pegarQuizz();
+ //pegarQuizzes();
 
 
 
@@ -227,8 +227,10 @@ function abrirCriarNiveisQuizz(){
 
 // TELA DE QUIZZ
 
-// const promise = axios.get("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes/1");
-// promise.then(abrirQuizz);
+let pontuacao = 0;
+
+const promise = axios.get("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes/1");
+promise.then(abrirQuizz);
 
 function requisitarQuizz(IDdoQuizz) {
     const promise = axios.get("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes/1");
@@ -251,45 +253,58 @@ function abrirQuizz (resposta){
         <div class="camada"></div>
     </div>`;
 
-    for (let i=0; i<perguntas.length; i++){
-        let template = ""
+        for (let i=0; i<perguntas.length; i++){
+            let template = ""
 
-        let template1 =
-        `<div class="pergunta aResponder">
-            <div class="enunciado cor${i}">${perguntas[i].title}</div>
-            <div class="alternativas">`;
+            let template1 =
+            `<div class="pergunta aResponder">
+                <div class="enunciado cor${i}">${perguntas[i].title}</div>
+                <div class="alternativas">`;
 
-        template += template1;
+            template += template1;
 
-        let alternativas = perguntas[i].answers;
-        alternativas.sort(comparador);
+            let alternativas = perguntas[i].answers;
+            alternativas.sort(comparador);
 
-        for(let j=0; j<alternativas.length; j++){
-           
-            let alternativa = alternativas[j];
-            let marcadorRespostaCorreta = "";
+                for(let j=0; j<alternativas.length; j++){
+                
+                    let alternativa = alternativas[j];
+                    let marcadorRespostaCorreta = "";
 
-            if(alternativa.isCorrectAnswer === true){
-                marcadorRespostaCorreta =  "alternativaCerta";
-            } else {
-                marcadorRespostaCorreta =  "alternativaErrada";
-            }
+                    if(alternativa.isCorrectAnswer === true){
+                        marcadorRespostaCorreta =  "alternativaCerta";
+                    } else {
+                        marcadorRespostaCorreta =  "alternativaErrada";
+                    }
 
-            let template2 = 
-            `<div class="respostaOculta ${marcadorRespostaCorreta}" onclick="escolherAlternativa(this);">
-                <img src="${alternativa.image}">
-                ${alternativa.text}
-            </div>`
+                    let template2 = 
+                    `<div class="respostaOculta ${marcadorRespostaCorreta}" onclick="escolherAlternativa(this);">
+                        <img src="${alternativa.image}">
+                        ${alternativa.text}
+                    </div>`
 
-            template += template2;
+                    template += template2;
+                }
+
+            template += `</div></div>`;
+            containerDePerguntas.innerHTML += template;
+            document.querySelector(`.cor${i}`).style.backgroundColor=`${perguntas[i].color}`;
         }
-
-        template += `</div></div>`;
-        containerDePerguntas.innerHTML += template;
-        document.querySelector(`.cor${i}`).style.backgroundColor=`${perguntas[i].color}`;
-    }
-
     
+    containerDePerguntas.innerHTML += `
+    <div class="resultado">
+        <div class="pontuacao">PONTUAÇÂO</div>
+        <div class="descricao">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl0490mgRuslkippWBd_Xvvem-OY2BhI9y25ygbQhh04nM_b6MCaqaMnS7glOniaX5hbU&usqp=CAU"/>
+            <div class="descricaoTexto"></div>
+        </div>
+    </div>
+
+    <div class="reiniciarQuizz">Reiniciar Quizz</div>
+    <div class="voltar">Voltar para Home</div>
+
+    `
+        
 }
 
 function comparador() {
@@ -307,6 +322,11 @@ function escolherAlternativa(divEscolhida) {
         divEscolhida.classList.add("alternativaSelecionada")
         while(divAlternativas.querySelector(".respostaOculta")){
             divAlternativas.querySelector(".respostaOculta").classList.remove("respostaOculta");
+        }
+        
+        if(divAlternativas.querySelector(".alternativaSelecionada.alternativaCerta")){
+            pontuacao++;
+            console.log(pontuacao)
         }
     }
 
