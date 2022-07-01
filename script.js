@@ -45,7 +45,7 @@ function erroNiveis () {
         msgErro();
     }
     let cont=0;
-    for (let i = 0; i < levels.lenght; i++) {
+    for (let i = 0; i < levels.length; i++) {
         if(levels.minValue === 0) {
             cont++;
         }
@@ -228,8 +228,11 @@ function abrirCriarNiveisQuizz(){
 // TELA DE QUIZZ
 
 let pontuacao = 0;
+let objetoQuizz;
+let numeroDePerguntas;
+let containerDePerguntas = document.querySelector(".quizzPage");
 
-const promise = axios.get("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes/1");
+const promise = axios.get("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes/2");
 promise.then(abrirQuizz);
 
 function requisitarQuizz(IDdoQuizz) {
@@ -240,11 +243,11 @@ function requisitarQuizz(IDdoQuizz) {
 
 function abrirQuizz (resposta){
 
-    let containerDePerguntas = document.querySelector(".quizzPage");
     containerDePerguntas.classList.remove("escondido");
 
-    let objetoQuizz = resposta.data;
+    objetoQuizz = resposta.data;
     let perguntas = objetoQuizz.questions;
+    numeroDePerguntas = perguntas.length;
 
     containerDePerguntas.innerHTML = 
     `<div class="capa">
@@ -292,19 +295,16 @@ function abrirQuizz (resposta){
         }
     
     containerDePerguntas.innerHTML += `
-    <div class="resultado">
-        <div class="pontuacao">PONTUAÇÂO</div>
-        <div class="descricao">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl0490mgRuslkippWBd_Xvvem-OY2BhI9y25ygbQhh04nM_b6MCaqaMnS7glOniaX5hbU&usqp=CAU"/>
-            <div class="descricaoTexto"></div>
+    <div class="containerResultado escondido">
+        <div class="resultado">
+            <div class="pontuacao"></div>
+            <div class="descricao"></div>
         </div>
+
+        <div class="reiniciarQuizz" onclick="reinicarQuizz();">Reiniciar Quizz</div>
+        <div class="voltar" onclick="voltarHome();">Voltar para Home</div>
     </div>
-
-    <div class="reiniciarQuizz">Reiniciar Quizz</div>
-    <div class="voltar">Voltar para Home</div>
-
-    `
-        
+    `        
 }
 
 function comparador() {
@@ -326,7 +326,6 @@ function escolherAlternativa(divEscolhida) {
         
         if(divAlternativas.querySelector(".alternativaSelecionada.alternativaCerta")){
             pontuacao++;
-            console.log(pontuacao)
         }
     }
 
@@ -334,6 +333,42 @@ function escolherAlternativa(divEscolhida) {
 
     setTimeout(function (){proximaPergunta.scrollIntoView({block: "center", behavior: "smooth"});},2000)
 
+
+    if(document.querySelector(".aResponder") === null){
+
+        let containerResultado = document.querySelector(".containerResultado");
+        let acerto = Math.round((pontuacao/numeroDePerguntas)*100)
+        let porcentagemAcerto = `${acerto}%`
+        let niveisAcerto = objetoQuizz.levels;
+        let levelEscolhido = -1;
+
+        for (let i=0; i < niveisAcerto.length; i++){
+
+            if(acerto >= niveisAcerto[i].minValue){
+                if(levelEscolhido < 0){
+                    levelEscolhido = i;
+                } else {
+                    if(niveisAcerto[i].minValue > niveisAcerto[levelEscolhido].minValue){
+                        levelEscolhido = i;
+                    }
+                }
+            }
+        }
+
+        document.querySelector(".pontuacao").innerHTML = `${porcentagemAcerto} de acerto: ${niveisAcerto[levelEscolhido].title}`;
+        document.querySelector(".descricao").innerHTML =`<img src='${niveisAcerto[levelEscolhido].image}'/><div class="descricaoTexto">${niveisAcerto[levelEscolhido].text}</div>`;
+
+        setTimeout(function (){
+            containerResultado.classList.remove("escondido");
+            document.querySelector(".resultado").scrollIntoView({block:"center", behavior: "smooth"});
+        },2000)
+        
+    }
+
+}
+
+function reiniciarQuizz (this){
+    
 }
 
 

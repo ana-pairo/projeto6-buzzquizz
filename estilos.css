@@ -252,7 +252,7 @@ body{
 }
 
 .quizzPage {
-    overflow: scroll;
+    overflow-y: hidden;
     width: 100%;
     margin-top: 69px;
     display: flex;
@@ -375,6 +375,13 @@ body{
 
 .alternativaSelecionada {
     opacity: 1;
+}
+
+.containerResultado {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
 }
 
 .resultado {
@@ -685,7 +692,7 @@ body{
     .resultado {
         width: 375px;
         height: 500px;
-        margin-bottom: 35px;
+        margin-bottom: 34px;
     }
     
     .pontuacao {
@@ -712,7 +719,7 @@ body{
     .descricaoTexto {
         margin: 15px 0;
         width: 340px;
-        height: 150px;
+        height: 96px;
         color: #484848;
         font-size: 17px;
         line-height: 22px;
