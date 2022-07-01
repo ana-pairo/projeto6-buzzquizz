@@ -222,6 +222,7 @@ function abrirCriarNiveisQuizz(){
 
     document.querySelector(".criarQuizz2").classList.add("escondido")
     document.querySelector(".telaNiveis").classList.remove("escondido")
+    renderizarNiveis();
 
 }
 
@@ -238,7 +239,7 @@ promise.then(abrirQuizz);
 function requisitarQuizz(IDdoQuizz) {
     const promise = axios.get("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes/1");
     promise.then(abrirQuizz);
-    promisse.catch(erroAbrirQuizz);
+    promise.catch(erroAbrirQuizz);
 }
 
 function abrirQuizz (resposta){
@@ -379,7 +380,6 @@ function reiniciarQuizz (this){
 function renderizarNiveis (){
     let niveis = document.querySelector(".niveis");
     niveis.innerHTML = "";
-    qtdNiveisCriarQuizz = 3;
     for (let i = 0; i < qtdNiveisCriarQuizz; i++) {
         niveis.innerHTML += 
         `<div class="nivel">
