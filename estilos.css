@@ -243,10 +243,8 @@ textarea::placeholder {
 
 
 /*TELA CRIAÇÃO DE QUIZZES - INFOS BASICAS*/ 
-                                    /* TELA 2 */
 
-                                    /* DESKTOP */
-
+                                                /* TELA 2 */
 body{
     background-color: #FAFAFA;
 }
@@ -471,7 +469,7 @@ body{
 
 }
 
-                            /*TELA CRIAÇÃO DE QUIZZES*/ 
+                                        /*TELA CRIAÇÃO DE QUIZZES*/ 
 
 .criarQuizz1 {
     padding-top: 69px;
@@ -627,7 +625,7 @@ body{
 }
 
 
-                                /*AJUSTE PARA MOBILE*/
+                                       /*AJUSTE PARA MOBILE*/
 
 @media (max-width: 1100px) {
 
@@ -736,6 +734,7 @@ body{
     .voltar {       
         font-size: 18px;
         line-height: 21px;
+        margin-bottom: 50px;
     
     }
     

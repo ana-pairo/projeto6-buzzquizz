@@ -1,5 +1,5 @@
 function pegarQuizzes () {
-    const promise = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes");
+    const promise = axios.get("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes");
     promise.then(exibirQuizzes);
 }
 
@@ -11,14 +11,14 @@ function exibirQuizzes (object) {
     quizzes.innerHTML = "";
     container.classList.remove("escondido");
     for(let i = 0; i < quizzServer.length; i++) {
-        quizzes.innerHTML += `<div class="quizz" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(${quizzServer[i].image});">
+        quizzes.innerHTML += `<div class="quizz" onclick="requisitarQuizz(${quizzServer[i].id});" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(${quizzServer[i].image});">
         <div class="nomeQuizz">${quizzServer[i].title}</div>
     </div>`;
     }
     
 }
 
- //pegarQuizzes();
+//  pegarQuizzes();
 
 
 
@@ -227,23 +227,18 @@ function abrirCriarNiveisQuizz(){
 }
 
 // TELA DE QUIZZ
-
-let pontuacao = 0;
-let objetoQuizz;
-let numeroDePerguntas;
+let objetoQuizz, numeroDePerguntas,pontuacao, idDoQuiz;
 let containerDePerguntas = document.querySelector(".quizzPage");
 
-const promise = axios.get("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes/2");
-promise.then(abrirQuizz);
-
 function requisitarQuizz(IDdoQuizz) {
-    const promise = axios.get("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes/1");
+    idDoQuiz = IDdoQuizz
+    const promise = axios.get(`https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes/${idDoQuiz}`);
     promise.then(abrirQuizz);
-    promise.catch(erroAbrirQuizz);
 }
 
 function abrirQuizz (resposta){
-
+    pontuacao = 0;
+    document.querySelector(".container").classList.add("escondido");
     containerDePerguntas.classList.remove("escondido");
 
     objetoQuizz = resposta.data;
@@ -303,7 +298,7 @@ function abrirQuizz (resposta){
         </div>
 
         <div class="reiniciarQuizz" onclick="reinicarQuizz();">Reiniciar Quizz</div>
-        <div class="voltar" onclick="voltarHome();">Voltar para Home</div>
+        <div class="voltar" onclick="voltarPaginaQuizzes();">Voltar para Home</div>
     </div>
     `        
 }
@@ -331,8 +326,9 @@ function escolherAlternativa(divEscolhida) {
     }
 
     let proximaPergunta = document.querySelector(".aResponder")
-
-    setTimeout(function (){proximaPergunta.scrollIntoView({block: "center", behavior: "smooth"});},2000)
+    if (document.querySelector(".aResponder")){
+        setTimeout(function (){proximaPergunta.scrollIntoView({block: "center", behavior: "smooth"});},2000);
+    }
 
 
     if(document.querySelector(".aResponder") === null){
@@ -362,15 +358,22 @@ function escolherAlternativa(divEscolhida) {
         setTimeout(function (){
             containerResultado.classList.remove("escondido");
             document.querySelector(".resultado").scrollIntoView({block:"center", behavior: "smooth"});
-        },2000)
-        
+        },2000)        
     }
-
+}
+ 
+function reinicarQuizz() {
+    containerDePerguntas.scrollIntoView({block:"start", behavior: "smooth"});
+    requisitarQuizz(idDoQuiz);
 }
 
-function reiniciarQuizz (this){
-    
+function voltarPaginaQuizzes() {
+    containerDePerguntas.classList.add("escondido");
+    document.querySelector(".container").classList.remove("escondido");  
+    document.querySelector(".container").scrollIntoView({block:"start", behavior:"auto"});                    
 }
+
+
 
 
 
