@@ -13,7 +13,7 @@
 <body>
 
     <div class="header">BuzzQuizz</div>
-     <div class="container escondido">
+     <div class="container">
         <div class="quizzUsuario">
                 <div class="semQuizz">Você não criou nenhum quizz ainda :(
                     <input type="button" class="btnQuizzUsuario" value="Criar Quizz" onclick="telaCriacao()">
@@ -31,18 +31,8 @@
 
     <div class="quizzPage escondido"> </div>
 
-<!--    <div class="headNiveis">Agora, decida os níveis!</div>
-        <div class="niveis">
-            <div class="nivel">
-                <span>Nível 1</span>
-                <input class ="tituloNivel" type="text" placeholder="Título do nível">
-                <input class ="acertos" type="text" placeholder="% de acerto mínima">
-                <input class ="url" type="text" placeholder="URL da imagem do nível">
-                <textarea class ="descricao" name="" id="" cols="30" rows="10" placeholder="Descrição do nível"></textarea>
-            </div>
-        </div> -->
-
-    <!-- <div class="criarQuizz1 escondido">
+    
+    <div class="criarQuizz1 escondido">
         <h1>Comece pelo começo</h1>
         <div class="infos">
             <input class="tituloCriarQuizz" type="text" placeholder="Título do seu quizz">
@@ -53,9 +43,9 @@
         <div class="botaoCriarQuizz" onclick="prosseguirCriarPerguntas()">
             Prosseguir pra criar perguntas
         </div>
-    </div> -->
+    </div> 
 
-    <!-- <div class="criarQuizz2 escondido">
+    <div class="criarQuizz2 escondido">
         <h1>Crie suas perguntas</h1>
         <div class="criarPergunta perg1">
             <div class="criarPerguntaMaximizado">
@@ -130,22 +120,15 @@
                 <input class ="tituloNivel" type="text" placeholder="Título do nível">
                 <input class ="acertos" type="text" placeholder="% de acerto mínima">
                 <input class ="url" type="text" placeholder="URL da imagem do nível">
-                <textarea class ="descricao" name="" id="" cols="30" rows="10" placeholder="Descrição do nível"></textarea>
+                <textarea class ="descricao" name="" id="" cols="30" rows="10" placeholder="Descrição do nível"></textarea> 
             </div>            
         </div> 
-        <input class="botaoFinalizarQuizz" type="button" value="Finalizar quizz">
+        <input class="botaoFinalizarQuizz" type="button" value="Finalizar quizz" onclick="finalizarQuizz()">
     </div> 
 
     <div class="telaSucesso escondido">
-        <div class="sucessoTitulo">Seu quizz está pronto!</div>
-        <div class="novoQuizz" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(imgs/teste.JPG);" onclick="acessarQuizz()">
-            <div class="nomeQuizz" onclick="acessarQuizz()">Título do quizz teste</div>
-        </div>
-        <div class="botoes">
-            <input type="button" class="botaoAcessarQuizz" value="Acessar Quizz" onclick="acessarQuizz()">
-            <input type="button" class="botaoHome" value="Voltar pra home" onclick="voltarHome()">
-        </div>
-    </div> -->
+        
+    </div> 
     
        
 

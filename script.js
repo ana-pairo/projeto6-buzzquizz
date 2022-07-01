@@ -18,7 +18,7 @@ function exibirQuizzes (object) {
     
 }
 
-//  pegarQuizzes();
+  pegarQuizzes();
 
 
 
@@ -387,10 +387,10 @@ function renderizarNiveis (){
         niveis.innerHTML += 
         `<div class="nivel">
             <span>Nível ${i+1}</span>
-            <input class ="tituloNivel ${i+1}" type="text" placeholder="Título do nível">
-            <input class ="acertos ${i+1}" type="text" placeholder="% de acerto mínima">
-            <input class ="url ${i+1}" type="text" placeholder="URL da imagem do nível">
-            <textarea class ="descricao ${i+1}" name="" id="" cols="30" rows="10" placeholder="Descrição do nível"></textarea>
+            <input class ="tituloNivel nv${i+1}" type="text" placeholder="Título do nível">
+            <input class ="acertos nv${i+1}" type="text" placeholder="% de acerto mínima">
+            <input class ="url nv${i+1}" type="text" placeholder="URL da imagem do nível">
+            <textarea class ="descricao nv${i+1}" name="" id="" cols="30" rows="10" placeholder="Descrição do nível"></textarea>
         </div>`;
     }
 }
@@ -400,71 +400,56 @@ function finalizarQuizz () {
         title: tituloCriarQuizz,
         image: urlCriarQuizz,
         questions: [
-            {
-                title: document.querySelector(".textoPergunta.perg1").value,
-                color: document.querySelector(".corPergunta.perg1").value,
-                answers: [
-                    {
-                        text: document.querySelector(".respCorreta.perg1").value,
-                        image: document.querySelector(".urlRespCorreta.perg1").value,
-                        isCorrectAnswer: true
-                    },
-                    {
-                        text: document.querySelector(".respIncorreta1.perg1").value,
-                        image: document.querySelector(".urlRespIncorreta1.perg1").value,
-                        isCorrectAnswer: false
-                    }
-                ]
-            },
-            {
-                title: "Título da pergunta 2",
-                color: "#123456",
-                answers: [
-                    {
-                        text: "Texto da resposta 1",
-                        image: "https://http.cat/411.jpg",
-                        isCorrectAnswer: true
-                    },
-                    {
-                        text: "Texto da resposta 2",
-                        image: "https://http.cat/412.jpg",
-                        isCorrectAnswer: false
-                    }
-                ]
-            },
-            {
-                title: "Título da pergunta 3",
-                color: "#123456",
-                answers: [
-                    {
-                        text: "Texto da resposta 1",
-                        image: "https://http.cat/411.jpg",
-                        isCorrectAnswer: true
-                    },
-                    {
-                        text: "Texto da resposta 2",
-                        image: "https://http.cat/412.jpg",
-                        isCorrectAnswer: false
-                    }
-                ]
-            }
+            
         ],
         levels: [
-            {
-                title: document.querySelector(".tituloNivel.1").value,
-                image: document.querySelector(".url.1").value,
-                text: document.querySelector(".descricao.1").value,
-                minValue: document.querySelector(".acertos.1").value
-            },
-            {
-                title: "Título do nível 2",
-                image: "https://http.cat/412.jpg",
-                text: "Descrição do nível 2",
-                minValue: 50
-            }
+            
         ]
     }
-    const promise = axios.post("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes", objQuizz);
+
+    for(let i = 0; i < qtdPerguntasCriarQuizz; i++) {
+         objQuizz.questions[i] = 
+             {
+                 title: document.querySelector(`.textoPergunta.perg${i+1}`).value,
+                 color: document.querySelector(`.corPergunta.perg${i+1}`).value,
+                 answers: [
+                     {
+                         text: document.querySelector(`.respCorreta.perg${i+1}`).value,
+                         image: document.querySelector(`.urlRespCorreta.perg${i+1}`).value,
+                         isCorrectAnswer: true
+                     },
+                     {
+                         text: document.querySelector(`.respIncorreta1.perg${i+1}`).value,
+                         image: document.querySelector(`.urlRespIncorreta1.perg${i+1}`).value,
+                         isCorrectAnswer: false
+                     },
+                     {
+                        text: document.querySelector(`.respIncorreta2.perg${i+1}`).value,
+                        image: document.querySelector(`.urlRespIncorreta2.perg${i+1}`).value,
+                        isCorrectAnswer: false
+                    },
+                    {
+                        text: document.querySelector(`.respIncorreta3.perg${i+1}`).value,
+                        image: document.querySelector(`.urlRespIncorreta3.perg${i+1}`).value,
+                        isCorrectAnswer: false
+                    }
+                 ]
+             }
+    }
+
+    for(let i = 0; i < qtdNiveisCriarQuizz; i++) {
+        objQuizz.levels[i] = {
+            title: document.querySelector(`.tituloNivel.nv${i+1}`).value,
+            image: document.querySelector(`.url.nv${i+1}`).value,
+            text: document.querySelector(`.descricao.nv${i+1}`).value,
+            minValue: document.querySelector(`.acertos.nv${i+1}`).value
+        }
+    }
+
+    //console.log(objQuizz);
+    const promise = axios.post("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes", objQuizz);
+    //console.log(promise);
+    promise.then(mostrarSucesso);
 }
 
 
@@ -472,11 +457,26 @@ function finalizarQuizz () {
 
 //TELA DE SUCESSO DO QUIZZ
 
+function mostrarSucesso () {
+    document.querySelector(".telaNiveis").classList.add("escondido");
+    document.querySelector(".telaSucesso").classList.remove("escondido");
+    document.querySelector(".telaSucesso").innerHTML = "";
+    document.querySelector(".telaSucesso").innerHTML = `
+    <div class="sucessoTitulo">Seu quizz está pronto!</div>
+    <div class="novoQuizz" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(${urlCriarQuizz});" onclick="acessarQuizz()">
+        <div class="nomeQuizz" onclick="acessarQuizz()">${tituloCriarQuizz}</div>
+    </div> 
+    <div class="botoes">
+        <input type="button" class="botaoAcessarQuizz" value="Acessar Quizz" onclick="acessarQuizz()">
+        <input type="button" class="botaoHome" value="Voltar pra home" onclick="voltarHome()">
+    </div>`;
+}
+
 function voltarHome () {
     let sucesso = document.querySelector(".telaSucesso");
     sucesso.innerHTML = "";
     sucesso.classList.add("escondido");
-    pegarQuizz();
+    pegarQuizzes();
 }
 
 function acessarQuizz () {
