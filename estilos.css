@@ -54,7 +54,7 @@
 
 }
 
-.quadroQuizzes {
+.quadroQuizzes, .quizzesUsuario {
     width: 1100px;
     margin: 0 auto;
     display: flex;
@@ -188,13 +188,13 @@
     justify-content: center;
 }
 
-.nivel {
+.nivelMaximizado {
     display: flex;
     flex-direction: column;
     margin: auto auto;
 }
 
-.nivel span {
+.nivelMaximizado span {
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: 700;
@@ -202,15 +202,16 @@
     margin-top: 20px;
 }
 
-.nivel input {
-    margin: 15px auto;
+.nivelMaximizado input {
+    margin: 15px;
     width: 565px;
     height: 45px;
     border: 1px solid #d1d1d1;
     border-radius: 5px;
 }
 
-.nivel textarea {
+.nivelMaximizado textarea {
+    width: 565px;
     border: 1px solid #d1d1d1;
     border-radius: 5px;
 }
@@ -566,7 +567,7 @@ body{
     font-size: 20px;
 }
 
-.criarPerguntaMinimizado{
+.criarPerguntaMinimizado, .nivelMinimizado{
     background-color: #FFFFFF;
     width: 100%;
     display: flex;
@@ -576,15 +577,15 @@ body{
     margin-bottom: 24px;
 }
 
-.criarPerguntaMinimizado img{
+.criarPerguntaMinimizado img, .nivelMinimizado img{
     height: 25px;
 }
 
-.criarPerguntaMinimizado img:hover{
+.criarPerguntaMinimizado img:hover, .nivelMinimizado img:hover{
     cursor: pointer;
 }
 
-.criarPerguntaMinimizado h1{
+.criarPerguntaMinimizado h1, .nivelMinimizado h1{
     margin: 0;
     font-family: 'Roboto', sans-serif;
     font-style: normal;
@@ -635,7 +636,7 @@ body{
         
     }
     
-    .quadroQuizzes {
+    .quadroQuizzes, .quizzesUsuario {
         width: 340px;
        
     }

@@ -18,7 +18,7 @@ function exibirQuizzes (object) {
     
 }
 
-  pegarQuizzes();
+//  pegarQuizzes();
 
 
 
@@ -381,18 +381,38 @@ function voltarPaginaQuizzes() {
 //TELA DE NÍVEIS
 
 function renderizarNiveis (){
-    let niveis = document.querySelector(".niveis");
+    let niveis = document.querySelector(".pagNiveis");
     niveis.innerHTML = "";
+    qtdNiveisCriarQuizz = 3;
     for (let i = 0; i < qtdNiveisCriarQuizz; i++) {
         niveis.innerHTML += 
-        `<div class="nivel">
-            <span>Nível ${i+1}</span>
-            <input class ="tituloNivel nv${i+1}" type="text" placeholder="Título do nível">
-            <input class ="acertos nv${i+1}" type="text" placeholder="% de acerto mínima">
-            <input class ="url nv${i+1}" type="text" placeholder="URL da imagem do nível">
-            <textarea class ="descricao nv${i+1}" name="" id="" cols="30" rows="10" placeholder="Descrição do nível"></textarea>
+        `<div class="niveis">
+            <div class="nivelMaximizado escondido">
+                <span>Nível ${i+1}</span>
+                <input class ="tituloNivel nv${i+1}" type="text" placeholder="Título do nível">
+                <input class ="acertos nv${i+1}" type="text" placeholder="% de acerto mínima">
+                <input class ="url nv${i+1}" type="text" placeholder="URL da imagem do nível">
+                <textarea class ="descricao nv${i+1}" name="" id="" cols="30" rows="10" placeholder="Descrição do nível"></textarea>
+            </div>
+            <div class="nivelMinimizado">
+                <h1>Nivel ${i+1}</h1>
+                <img src="./imgs/icon-edit.svg" onclick="maximizarNivel(this)"/>
+            </div>
         </div>`;
     }
+}
+
+function maximizarNivel(elemento){
+
+    if(document.querySelector(".nivelMaximizado:not(.escondido)")) {
+        document.querySelector(".nivelMaximizado:not(.escondido)").classList.add("escondido");
+    }
+    if(document.querySelector(".nivelMinimizado.escondido")) {
+        document.querySelector(".nivelMinimizado.escondido").classList.remove("escondido");
+    }
+    elemento.parentElement.parentElement.firstElementChild.classList.remove("escondido");
+    elemento.parentElement.classList.add("escondido");
+
 }
 
 function finalizarQuizz () {
