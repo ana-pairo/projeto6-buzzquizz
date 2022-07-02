@@ -298,6 +298,10 @@ function abrirQuizz (resposta){
             template += `</div></div>`;
             containerDePerguntas.innerHTML += template;
             document.querySelector(`.cor${i}`).style.backgroundColor=`${perguntas[i].color}`;
+            if (perguntas[i].color === "#FFFFFF"){
+                document.querySelector(`.cor${i}`).style.color="#488584";
+                document.querySelector(`.cor${i}`).style.boxShadow = "0px 0px 5px rgba(0, 0, 0, 0.3)"
+            }
         }
     
     containerDePerguntas.innerHTML += `
@@ -309,8 +313,8 @@ function abrirQuizz (resposta){
 
         <div class="reiniciarQuizz" onclick="reinicarQuizz();">Reiniciar Quizz</div>
         <div class="voltar" onclick="voltarPaginaQuizzes();">Voltar para Home</div>
-    </div>
-    `        
+    </div>`;
+    document.querySelector(".capa").scrollIntoView({block:"center", behavior:"auto"});      
 }
 
 function comparador() {
