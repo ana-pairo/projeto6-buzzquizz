@@ -263,24 +263,27 @@ body{
 
 .capa {
     width: 100%;
-    height: 227px;
+    height: 40vw;
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
     justify-content: center;
     position: relative;
     margin-bottom: 42px;
+    min-height: 180x;
+    max-height: 227px;
 }
 
 .capa img {
     width: 100%;
-    height: 227px;
+    height: 100%;
     object-fit: cover;
 }
 
 .tituloQuizz {
     position: absolute;
     width: 100%;
+    height: 100%;
     z-index: 1;
     font-size: 39px;
     font-family: 'Roboto', sans-serif;
@@ -288,11 +291,15 @@ body{
     line-height: 45px;
     text-align: center;
     color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    word-break: break-all;
 
 }
 
 .camada {    
-    height: 227px;
+    height: 100%;
     width: 100%;
     position: absolute;
     background-color: rgb(0, 0, 0, 0.6);
@@ -300,7 +307,7 @@ body{
 }
 
 .pergunta {
-    width: 759px;
+    width: 90%;
     height: 670px;
     background-color: #ffffff;
     margin-bottom: 40px;
@@ -312,18 +319,17 @@ body{
 }
 
 .enunciado {
-    width: 688px;
+    width: 90%;
     height: 89px;
-    /* MUDAR A COR PELO JS */
-    background-color: #A0438D;
-    /* MUDAR A COR PELO JS */
+    background-color: #ff4b4b;
     color: #ffffff;
     font-size: 23px;
     font-weight: 700;
     font-family: 'Roboto', sans-serif;
     line-height: 27px;
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
+    word-break: break-all;
     justify-content: center;
     text-align: center;
     align-items: center;
@@ -331,6 +337,7 @@ body{
 }
 
 .alternativas {
+    width: 80%;
     margin-top: 30px;
     display: flex;
     flex-wrap: wrap;
@@ -339,10 +346,11 @@ body{
 }
 
 .alternativas div {
-    width: 330px;
+    width: 45%;
     height: 235px;
     display: flex;
     flex-direction: column;
+    word-wrap: break-word;
     align-items: left;
     margin-bottom: 20px;
     font-size: 20px;
@@ -377,6 +385,7 @@ body{
 }
 
 .containerResultado {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -384,7 +393,7 @@ body{
 }
 
 .resultado {
-    width: 759px;
+    width: 90%;
     height: 430px;
     background-color: #ffffff;
     margin-bottom: 57px;
@@ -392,14 +401,13 @@ body{
     flex-direction: column;
     align-items: center;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+    min-width: 759px;
+    min-height: 430px;;
 }
 
 .pontuacao {
-    width: 727px;
+    width: 85%;
     height: 100px;
-    /* MUDAR A COR PELO JS */
-    background-color: #EC362D;
-    /* MUDAR A COR PELO JS */
     color: #ffffff;
     font-size: 23px;
     font-weight: 700;
@@ -414,7 +422,7 @@ body{
 }
 
 .descricao {
-    width: 727px;
+    width: 85%;
     margin-top: 20px;
     display: flex;
     justify-content: space-between;
@@ -422,13 +430,13 @@ body{
 }
 
 .descricao img {
-    width: 364px;
+    width: 49%;
     height: 273px;
     object-fit: cover;
 }
 
 .descricaoTexto {
-    width: 328px;
+    width: 49%;
     height: 273px;
     color: #484848;
     font-size: 19px;
@@ -643,81 +651,86 @@ body{
 
     /* TELA 2 */
 
-    .capa {
-        margin-bottom: 24px;
-    }
-
-    .camada, .capa, .capa img {
-        height: 142px;
-    }
-
     .tituloQuizz {
         font-size: 19px;
-        line-height: 22px;    
+        line-height: 22px; 
+        min-width: 340px;   
     }
     
     .pergunta {
-        width: 375px;
-        height: 436px;
+        width: 90vw;
+        height: 60vw;
         margin-bottom: 30px;
         padding: 0 20px;
+        min-width: 340px;
+        min-height: 436px;
     }
 
     .enunciado {
-        width: 340px;
-        height: 89px;
+        width: 90%;
+        height: 20%;
         font-size: 19px;
         line-height: 22px;
         margin-top: 20px;
+        min-width: 320px;
     }
 
     .alternativas {
+        height: 80%;
+        width: 90%;
         margin-top: 15px;
+        min-width: 320px;
     }
 
     .alternativas div {
-        width: 163px;
-        height: 160px;
+        width: 48%;
+        height: 45%;
         margin-bottom: 15px;
         font-size: 13px;
         line-height: 15px;
+        min-height: 160px;
     }
 
     .alternativas  img {
-        height: 120px;
+        width: 100%;
+        height: 80%;
         margin-bottom: 5px;
+        min-height: 120px;
     }
 
     .resultado {
-        width: 375px;
+        width: 90%;
         height: 500px;
         margin-bottom: 34px;
+        min-width: 340px;
     }
     
     .pontuacao {
-        width: 340px;
+        width: 90%;
         height: 99px;
         font-size: 19px;
         font-weight: 700;
         line-height: 22px;
+        min-width: 320px;
     }
     
     .descricao {
-        width: 340px;
+        width: 90%;
         margin-top: 10px;
         display: flex;
         flex-direction: column;
         align-items: center;
+        min-width: 320px;
     }
     
     .descricao img {
-        width: 340px;
+        width: 100%;
         height: 255px;
     }
     
     .descricaoTexto {
         margin: 15px 0;
-        width: 340px;
+        width: 100%;
         height: 96px;
         color: #484848;
         font-size: 17px;
