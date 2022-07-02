@@ -9,6 +9,11 @@ function exibirQuizzes (object) {
     quizzServer = object.data;
     let quizzes = document.querySelector(".quadroQuizzes");
     let userQuizzes = document.querySelector(".semQuizz");
+    //LINHA ADICIONADA - CORRIGIR BUG
+    if(localStorage.getItem("id")!=='[]' && localStorage.length > 0) {
+        userQuizzes.classList.add("escondido");
+    }
+    //LINHA ADICIONADA
     let container = document.querySelector(".container");
     quizzes.innerHTML = "";
     container.classList.remove("escondido");
@@ -17,11 +22,16 @@ function exibirQuizzes (object) {
     }
     for(let i = 0; i < quizzServer.length; i++) {
          //for(let j = 0; j < listaIDs.lenght; j++) {
-             if(listaIDs.length>0 && quizzServer[i].id === listaIDs[i]) {
-                 document.querySelector(".quizzUsuario").innerHTML += `<div class="quizz" onclick="requisitarQuizz(${quizzServer[i].id});" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(${quizzServer[i].image});">
-                 <div class="nomeQuizz">${quizzServer[i].title}</div>
-             </div>`;
+            //LINHA ADICIONADA - CORRIGIR BUG
+             if(listaIDs!== null) {
+            //LINHA ADICIONADA
+                if(quizzServer[i].id === listaIDs[i]) {
+                     document.querySelector(".quizzUsuario").innerHTML += `<div class="quizz" onclick="requisitarQuizz(${quizzServer[i].id});" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(${quizzServer[i].image});">
+                     <div class="nomeQuizz">${quizzServer[i].title}</div>
+                 </div>`;
+                }            
              } else {
+                console.log("Aqui")
             quizzes.innerHTML += `<div class="quizz" onclick="requisitarQuizz(${quizzServer[i].id});" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(${quizzServer[i].image});">
             <div class="nomeQuizz">${quizzServer[i].title}</div>
         </div>`;}
