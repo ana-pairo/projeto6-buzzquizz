@@ -3,20 +3,30 @@ function pegarQuizzes () {
     promise.then(exibirQuizzes);
 }
 
-
+let listaIDs = JSON.parse(localStorage.getItem('id'));
 function exibirQuizzes (object) {
     quizzServer = object.data;
     let quizzes = document.querySelector(".quadroQuizzes");
+    let userQuizzes = document.querySelector(".semQuizz");
+    userQuizzes.classList.add("escondido");
     let container = document.querySelector(".container");
     quizzes.innerHTML = "";
     container.classList.remove("escondido");
     for(let i = 0; i < quizzServer.length; i++) {
-        quizzes.innerHTML += `<div class="quizz" onclick="requisitarQuizz(${quizzServer[i].id});" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(${quizzServer[i].image});">
-        <div class="nomeQuizz">${quizzServer[i].title}</div>
-    </div>`;
+         //for(let j = 0; j < listaIDs.lenght; j++) {
+             if(quizzServer[i].id === listaIDs[i]) {
+                 document.querySelector(".quizzUsuario").innerHTML += `<div class="quizz" onclick="requisitarQuizz(${quizzServer[i].id});" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(${quizzServer[i].image});">
+                 <div class="nomeQuizz">${quizzServer[i].title}</div>
+             </div>`;
+             } else {
+            quizzes.innerHTML += `<div class="quizz" onclick="requisitarQuizz(${quizzServer[i].id});" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(${quizzServer[i].image});">
+            <div class="nomeQuizz">${quizzServer[i].title}</div>
+        </div>`;}
+        }
     }
     
-}
+    
+//}
 
  pegarQuizzes();
 
@@ -387,7 +397,6 @@ function voltarPaginaQuizzes() {
 function renderizarNiveis (){
     let niveis = document.querySelector(".pagNiveis");
     niveis.innerHTML = "";
-    qtdNiveisCriarQuizz = 3;
     for (let i = 0; i < qtdNiveisCriarQuizz; i++) {
         niveis.innerHTML += 
         `<div class="niveis">
@@ -419,17 +428,20 @@ function maximizarNivel(elemento){
 
 }
 
+let objQuizz = {
+    title: "",
+    image: "",
+    questions: [
+        
+    ],
+    levels: [
+        
+    ]
+}
+
 function finalizarQuizz () {
-    let objQuizz = {
-        title: tituloCriarQuizz,
-        image: urlCriarQuizz,
-        questions: [
-            
-        ],
-        levels: [
-            
-        ]
-    }
+    objQuizz.title = tituloCriarQuizz;
+    objQuizz.image = urlCriarQuizz;
 
     for(let i = 0; i < qtdPerguntasCriarQuizz; i++) {
          objQuizz.questions[i] = 
@@ -459,16 +471,27 @@ function finalizarQuizz () {
                     }
                  ]
              }
-    }
-
-    for(let i = 0; i < qtdNiveisCriarQuizz; i++) {
+        
+        }     
+    
+     for(let i = 0; i < qtdNiveisCriarQuizz; i++) {
         objQuizz.levels[i] = {
             title: document.querySelector(`.tituloNivel.nv${i+1}`).value,
             image: document.querySelector(`.url.nv${i+1}`).value,
             text: document.querySelector(`.descricao.nv${i+1}`).value,
             minValue: document.querySelector(`.acertos.nv${i+1}`).value
         }
-    }
+     }
+
+      for(let i = 0; i < qtdPerguntasCriarQuizz; i++){
+         
+          if (objQuizz.questions[i].answers[3].text === "") {
+              objQuizz.questions[i].answers.splice(3,1);
+              if(objQuizz.questions[i].answers[2].text === "") {
+                 objQuizz.questions[i].answers.splice(2,1);
+              }
+          }
+      }
 
     //console.log(objQuizz);
     const promise = axios.post("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes", objQuizz);
@@ -512,14 +535,12 @@ function salvarIdLocalmente(id){
 
 function voltarHome () {
     let sucesso = document.querySelector(".telaSucesso");
-    sucesso.innerHTML = "";
     sucesso.classList.add("escondido");
     pegarQuizzes();
 }
 
 function acessarQuizz () {
     let sucesso = document.querySelector(".telaSucesso");
-    sucesso.innerHTML = "";
     sucesso.classList.add("escondido");
     let quizzPage = document.querySelector(".quizzPage");
     quizzPage.classList.remove("escondido");
@@ -531,7 +552,6 @@ function acessarQuizz () {
 
 function telaCriacao () {
     let homepage = document.querySelector(".container");
-    homepage.innerHTML = "";
     homepage.classList.add("escondido");
     document.querySelector(".criarQuizz1").classList.remove("escondido");
 }
