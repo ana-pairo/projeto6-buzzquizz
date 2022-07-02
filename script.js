@@ -3,20 +3,30 @@ function pegarQuizzes () {
     promise.then(exibirQuizzes);
 }
 
-
+let listaIDs = JSON.parse(localStorage.getItem('id'));
 function exibirQuizzes (object) {
     quizzServer = object.data;
     let quizzes = document.querySelector(".quadroQuizzes");
+    let userQuizzes = document.querySelector(".semQuizz");
+    userQuizzes.classList.add("escondido");
     let container = document.querySelector(".container");
     quizzes.innerHTML = "";
     container.classList.remove("escondido");
     for(let i = 0; i < quizzServer.length; i++) {
-        quizzes.innerHTML += `<div class="quizz" onclick="requisitarQuizz(${quizzServer[i].id});" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(${quizzServer[i].image});">
-        <div class="nomeQuizz">${quizzServer[i].title}</div>
-    </div>`;
+         //for(let j = 0; j < listaIDs.lenght; j++) {
+             if(quizzServer[i].id === listaIDs[i]) {
+                 document.querySelector(".quizzUsuario").innerHTML += `<div class="quizz" onclick="requisitarQuizz(${quizzServer[i].id});" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(${quizzServer[i].image});">
+                 <div class="nomeQuizz">${quizzServer[i].title}</div>
+             </div>`;
+             } else {
+            quizzes.innerHTML += `<div class="quizz" onclick="requisitarQuizz(${quizzServer[i].id});" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(${quizzServer[i].image});">
+            <div class="nomeQuizz">${quizzServer[i].title}</div>
+        </div>`;}
+        }
     }
     
-}
+    
+//}
 
  pegarQuizzes();
 
@@ -521,7 +531,6 @@ function salvarIdLocalmente(id){
 
 function voltarHome () {
     let sucesso = document.querySelector(".telaSucesso");
-    sucesso.innerHTML = "";
     sucesso.classList.add("escondido");
     pegarQuizzes();
 }
