@@ -473,11 +473,11 @@ function finalizarQuizz () {
 }
 
 
-
-
 //TELA DE SUCESSO DO QUIZZ
 
-function mostrarSucesso () {
+let id;
+
+function mostrarSucesso (resp) {
     document.querySelector(".telaNiveis").classList.add("escondido");
     document.querySelector(".telaSucesso").classList.remove("escondido");
     document.querySelector(".telaSucesso").innerHTML = "";
@@ -490,6 +490,20 @@ function mostrarSucesso () {
         <input type="button" class="botaoAcessarQuizz" value="Acessar Quizz" onclick="acessarQuizz()">
         <input type="button" class="botaoHome" value="Voltar pra home" onclick="voltarHome()">
     </div>`;
+
+    //criar Local Storage dos IDs criados:
+    salvarIdLocalmente(resp.data.id)
+}
+
+function salvarIdLocalmente(id){
+    if (localStorage.length===0){
+        localStorage.setItem('id',JSON.stringify([id]));
+    } else {
+        let listaID=JSON.parse(localStorage.getItem('id'))
+        listaID.push(id)
+        localStorage.setItem('id', JSON.stringify(listaID))
+    }
+    console.log(localStorage)
 }
 
 function voltarHome () {
