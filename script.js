@@ -151,7 +151,6 @@ function maximizarPergunta(elemento){
 
 function prosseguirCriarNiveis(){
 
-    //Apagar essa linha depois
     let erro=0;
     let a=0;
     let textoPergunta, corPergunta, respCorreta, urlRespCorreta, respIncorreta1, urlRespIncorreta1, respIncorreta2, urlRespIncorreta2, respIncorreta3, urlRespIncorreta3;
