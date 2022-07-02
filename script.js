@@ -18,7 +18,7 @@ function exibirQuizzes (object) {
     
 }
 
-//  pegarQuizzes();
+ pegarQuizzes();
 
 
 
@@ -383,7 +383,6 @@ function voltarPaginaQuizzes() {
 function renderizarNiveis (){
     let niveis = document.querySelector(".pagNiveis");
     niveis.innerHTML = "";
-    qtdNiveisCriarQuizz = 3;
     for (let i = 0; i < qtdNiveisCriarQuizz; i++) {
         niveis.innerHTML += 
         `<div class="niveis">
@@ -415,17 +414,20 @@ function maximizarNivel(elemento){
 
 }
 
+let objQuizz = {
+    title: "",
+    image: "",
+    questions: [
+        
+    ],
+    levels: [
+        
+    ]
+}
+
 function finalizarQuizz () {
-    let objQuizz = {
-        title: tituloCriarQuizz,
-        image: urlCriarQuizz,
-        questions: [
-            
-        ],
-        levels: [
-            
-        ]
-    }
+    objQuizz.title = tituloCriarQuizz;
+    objQuizz.image = urlCriarQuizz;
 
     for(let i = 0; i < qtdPerguntasCriarQuizz; i++) {
          objQuizz.questions[i] = 
@@ -455,16 +457,27 @@ function finalizarQuizz () {
                     }
                  ]
              }
-    }
-
-    for(let i = 0; i < qtdNiveisCriarQuizz; i++) {
+        
+        }     
+    
+     for(let i = 0; i < qtdNiveisCriarQuizz; i++) {
         objQuizz.levels[i] = {
             title: document.querySelector(`.tituloNivel.nv${i+1}`).value,
             image: document.querySelector(`.url.nv${i+1}`).value,
             text: document.querySelector(`.descricao.nv${i+1}`).value,
             minValue: document.querySelector(`.acertos.nv${i+1}`).value
         }
-    }
+     }
+
+      for(let i = 0; i < qtdPerguntasCriarQuizz; i++){
+         
+          if (objQuizz.questions[i].answers[3].text === "") {
+              objQuizz.questions[i].answers.splice(3,1);
+              if(objQuizz.questions[i].answers[2].text === "") {
+                 objQuizz.questions[i].answers.splice(2,1);
+              }
+          }
+      }
 
     //console.log(objQuizz);
     const promise = axios.post("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes", objQuizz);
@@ -501,7 +514,6 @@ function voltarHome () {
 
 function acessarQuizz () {
     let sucesso = document.querySelector(".telaSucesso");
-    sucesso.innerHTML = "";
     sucesso.classList.add("escondido");
     let quizzPage = document.querySelector(".quizzPage");
     quizzPage.classList.remove("escondido");
@@ -513,7 +525,6 @@ function acessarQuizz () {
 
 function telaCriacao () {
     let homepage = document.querySelector(".container");
-    homepage.innerHTML = "";
     homepage.classList.add("escondido");
     document.querySelector(".criarQuizz1").classList.remove("escondido");
 }
