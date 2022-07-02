@@ -6,6 +6,7 @@ function pegarQuizzes () {
 let listaIDs = JSON.parse(localStorage.getItem('id'));
 
 function exibirQuizzes (object) {
+    let cont=0;
     quizzServer = object.data;
     let quizzes = document.querySelector(".quadroQuizzes");
     let userQuizzes = document.querySelector(".semQuizz");
@@ -17,26 +18,39 @@ function exibirQuizzes (object) {
     let container = document.querySelector(".container");
     quizzes.innerHTML = "";
     container.classList.remove("escondido");
-    if (localStorage.getItem("id")!=='[]'){
+    if (localStorage.getItem("id")!=='[]' && localStorage.length > 0){
         userQuizzes.classList.add("escondido");
     }
-    for(let i = 0; i < quizzServer.length; i++) {
-         //for(let j = 0; j < listaIDs.lenght; j++) {
-            //LINHA ADICIONADA - CORRIGIR BUG
-             if(listaIDs!== null) {
-            //LINHA ADICIONADA
-                if(quizzServer[i].id === listaIDs[i]) {
-                     document.querySelector(".quizzUsuario").innerHTML += `<div class="quizz" onclick="requisitarQuizz(${quizzServer[i].id});" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(${quizzServer[i].image});">
-                     <div class="nomeQuizz">${quizzServer[i].title}</div>
-                 </div>`;
-                }            
-             } else {
-                console.log("Aqui")
+
+    console.log(listaIDs)
+    if (listaIDs===null) {
+        for(let i = 0; i < quizzServer.length; i++) {
             quizzes.innerHTML += `<div class="quizz" onclick="requisitarQuizz(${quizzServer[i].id});" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(${quizzServer[i].image});">
             <div class="nomeQuizz">${quizzServer[i].title}</div>
-        </div>`;}
+            </div>`;
+        }
+    } else {
+        for(let i = 0; i < quizzServer.length; i++) {
+            cont=0;
+            for(let j = 0; j < listaIDs.length; j++) {
+                console.log(j)
+                if (quizzServer[i].id === listaIDs[j]){
+                    cont++
+                }
+            }
+                if(cont>0) {
+                    document.querySelector(".quizzUsuario").innerHTML += `<div class="quizz" onclick="requisitarQuizz(${quizzServer[i].id});" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(${quizzServer[i].image});">
+                    <div class="nomeQuizz">${quizzServer[i].title}</div>
+                    </div>`;
+                } else {
+                    quizzes.innerHTML += `<div class="quizz" onclick="requisitarQuizz(${quizzServer[i].id});" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(${quizzServer[i].image});">
+                    <div class="nomeQuizz">${quizzServer[i].title}</div>
+                    </div>`;
+                }
         }
     }
+    
+}
     
     
 //}
@@ -531,10 +545,10 @@ function mostrarSucesso (resp) {
     </div>`;
 
     //criar Local Storage dos IDs criados:
-    salvarIdLocalmente(resp.data.id)
+    salvarQuizzLocalmente(resp.data)
 }
 
-function salvarIdLocalmente(id){
+function salvarQuizzLocalmente(id){
     if (localStorage.length===0){
         localStorage.setItem('id',JSON.stringify([id]));
     } else {
