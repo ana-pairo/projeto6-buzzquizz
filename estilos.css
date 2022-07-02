@@ -483,6 +483,18 @@ body{
 
 }
 
+[onclick] {
+    cursor: pointer;
+}
+
+.reiniciarQuizz:hover{
+    background-color: rgb(236, 54, 45, 0.8);
+}
+
+.voltar:hover {
+    color: rgba(124, 124, 124, 0.5);
+}
+
                                         /*TELA CRIAÇÃO DE QUIZZES*/ 
 
 .criarQuizz1 {
