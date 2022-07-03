@@ -19,39 +19,59 @@ function exibirQuizzes (object) {
     let container = document.querySelector(".container");
     quizzes.innerHTML = "";
     container.classList.remove("escondido");
-    if (localStorage.getItem("id")!=='[]' && localStorage.length > 0){
-        userQuizzes.classList.add("escondido");
-    }
 
-    //console.log(listaIDs)
-    if (listaIDs===null) {
-        for(let i = 0; i < quizzServer.length; i++) {
-            quizzes.innerHTML += `<div class="quizz" onclick="requisitarQuizz(${quizzServer[i].id});" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(${quizzServer[i].image});">
-            <div class="nomeQuizz">${quizzServer[i].title}</div>
-            </div>`;
-        }
-    } else {
-        for(let i = 0; i < quizzServer.length; i++) {
-            cont=0;
+    for(let i = 0; i < quizzServer.length; i++) {
+        if (listaIDs!== null) {
             for(let j = 0; j < listaIDs.length; j++) {
-                console.log(j)
-                if (quizzServer[i].id === listaIDs[j]){
-                    cont++
-                }
-            }
-                if(cont>0) {
-                    document.querySelector(".quizzUsuario").innerHTML += `<div class="quizz" onclick="requisitarQuizz(${quizzServer[i].id});" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(${quizzServer[i].image});">
-                    <div class="nomeQuizz">${quizzServer[i].title}</div>
-                    </div>`;
-                } else {
+                if(quizzServer[i].id !== listaIDs[j].id) {            
                     quizzes.innerHTML += `<div class="quizz" onclick="requisitarQuizz(${quizzServer[i].id});" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(${quizzServer[i].image});">
                     <div class="nomeQuizz">${quizzServer[i].title}</div>
                     </div>`;
                 }
+            }
         }
+        
+        if(listaIDs.length === null) {
+            quizzes.innerHTML += `<div class="quizz" onclick="requisitarQuizz(${quizzServer[i].id});" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(${quizzServer[i].image});">
+            <div class="nomeQuizz">${quizzServer[i].title}</div>
+            </div>`;
+        } 
+          
     }
-    
 }
+    // if (localStorage.getItem("id")!=='[]' && localStorage.length > 0){
+    //     userQuizzes.classList.add("escondido");
+    // }
+
+    //console.log(listaIDs)
+    // if (listaIDs===null) {
+    //     for(let i = 0; i < quizzServer.length; i++) {
+    //         quizzes.innerHTML += `<div class="quizz" onclick="requisitarQuizz(${quizzServer[i].id});" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(${quizzServer[i].image});">
+    //         <div class="nomeQuizz">${quizzServer[i].title}</div>
+    //         </div>`;
+    //     }
+    // } else {
+    //     for(let i = 0; i < quizzServer.length; i++) {
+    //         cont=0;
+    //         for(let j = 0; j < listaIDs.length; j++) {
+    //             //console.log(j)
+    //             if (quizzServer[i].id === listaIDs[j]){
+    //                 cont++
+    //             }
+    //         }
+    //             if(cont>0) {
+    //                 document.querySelector(".quizzUsuario").innerHTML += `<div class="quizz" onclick="requisitarQuizz(${quizzServer[i].id});" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(${quizzServer[i].image});">
+    //                 <div class="nomeQuizz">${quizzServer[i].title}</div>
+    //                 </div>`;
+    //             } else {
+    //                 quizzes.innerHTML += `<div class="quizz" onclick="requisitarQuizz(${quizzServer[i].id});" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(${quizzServer[i].image});">
+    //                 <div class="nomeQuizz">${quizzServer[i].title}</div>
+    //                 </div>`;
+    //             }
+    //     }
+    // }
+    
+
     
     
 
