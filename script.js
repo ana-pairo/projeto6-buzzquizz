@@ -76,7 +76,7 @@ function exibirQuizzes (object) {
     
 
 
-pegarQuizzes();
+//pegarQuizzes();
 
 function exibirQuizzesUsuario () {
     let quadroQuizzesUsuario = document.querySelector(".quizzesDoUsuario");
@@ -456,7 +456,7 @@ function voltarPaginaQuizzes() {
 function renderizarNiveis (){
     let niveis = document.querySelector(".pagNiveis");
     niveis.innerHTML = "";
-    //qtdNiveisCriarQuizz = 5;
+    qtdNiveisCriarQuizz = 5;
     for (let i = 0; i < qtdNiveisCriarQuizz; i++) {
         niveis.innerHTML += 
         `<div class="niveis">
