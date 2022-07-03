@@ -31,7 +31,7 @@ function exibirQuizzes (object) {
             }
         }
         
-        if(listaIDs.length === null) {
+        if(listaIDs === null) {
             quizzes.innerHTML += `<div class="quizz" onclick="requisitarQuizz(${quizzServer[i].id});" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(${quizzServer[i].image});">
             <div class="nomeQuizz">${quizzServer[i].title}</div>
             </div>`;
