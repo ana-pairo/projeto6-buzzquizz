@@ -100,6 +100,61 @@
 
 }
 
+.comQuizzUsuario {
+    display: flex;
+    flex-direction: column;
+    width: 1000px;
+    height: 250px;
+    background-color: #fafafa;
+    margin: 140px auto;
+    margin-bottom: 0;
+}
+
+.seusQuizzes {
+    width: 250px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    align-items: center;
+    margin: 10px;
+}
+
+.seusQuizzes img {
+    margin: 0 20px;
+    cursor: pointer;
+}
+
+.semQuizzUsuario {
+    width: 1000px;
+    height: 180px;
+    background-color: #fafafa;
+    border: 1px dashed #D5D5D5;
+    border-radius: 5px;
+    margin: 140px auto;
+    margin-bottom: 110px;
+    display: flex;
+
+}
+
+.todosOsQuizzes {
+    width: 1000px;
+    margin: auto auto;
+}
+
+.quadroQuizzes, .quizzesDoUsuario {
+    width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.quizzesDoUsuario {
+    
+    height: 200px;
+}
+
 .btnQuizzUsuario {
     width: 150px;
     height: 40px;
@@ -180,6 +235,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.headNiveis {
+    margin-top: 0;
 }
 
 .niveis {

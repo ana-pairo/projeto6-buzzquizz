@@ -13,19 +13,27 @@
 <body>
 
     <div class="header">BuzzQuizz</div>
-     <div class="container">
-        <div class="quizzUsuario ">
-                <div class="semQuizz">Você não criou nenhum quizz ainda :(
-                    <input type="button" class="btnQuizzUsuario" value="Criar Quizz" onclick="telaCriacao()">
-                </div>
+    <div class="container">
+        <div class="semQuizzUsuario">
+            <div class="semQuizz">Você não criou nenhum quizz ainda :(
+                <input type="button" class="btnQuizzUsuario" value="Criar Quizz" onclick="telaCriacao()">
+            </div>
+        </div>       
+        <div class="comQuizzUsuario escondido">
+            <div class="seusQuizzes">Seus Quizzes <img src="imgs/mais.png" alt="" onclick="telaCriacao()"> </div>
+            <div class="quizzesDoUsuario">
+            </div>
         </div>
-               
-            
-        <div class="titulo">Todos os Quizzes</div>
-        <div class="quadroQuizzes">
+                   
+        
+        <div class="todosOsQuizzes">
+            <div class="titulo">Todos os Quizzes</div>
+            <div class="quadroQuizzes">
                 
                                    
+            </div>
         </div>
+        
     </div>  
 
 
@@ -116,7 +124,7 @@
         <div class="headNiveis">Agora, decida os níveis!</div>
         <div class="pagNiveis"></div>
         <div class="niveis">
-            <div class="nivelMinimizado">
+            <!-- <div class="nivelMinimizado">
                 <h1>Nivel 1</h1>
                 <img src="./imgs/icon-edit.svg" onclick="maximizarNivel(this)"/>
             </div>
@@ -140,7 +148,7 @@
                 <input class ="acertos" type="text" placeholder="% de acerto mínima">
                 <input class ="url" type="text" placeholder="URL da imagem do nível">
                 <textarea class ="descricao" name="" id="" cols="30" rows="10" placeholder="Descrição do nível"></textarea> 
-            </div>           
+            </div>            -->
         </div> 
         <input class="botaoFinalizarQuizz" type="button" value="Finalizar quizz" onclick="finalizarQuizz()">
     </div> 

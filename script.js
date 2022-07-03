@@ -9,10 +9,11 @@ function exibirQuizzes (object) {
     let cont=0;
     quizzServer = object.data;
     let quizzes = document.querySelector(".quadroQuizzes");
-    let userQuizzes = document.querySelector(".semQuizz");
+    let userQuizzes = document.querySelector(".semQuizzUsuario");
     //LINHA ADICIONADA - CORRIGIR BUG
     if(localStorage.getItem("id")!=='[]' && localStorage.length > 0) {
         userQuizzes.classList.add("escondido");
+        document.querySelector(".comQuizzUsuario").classList.remove("escondido");
     }
     //LINHA ADICIONADA
     let container = document.querySelector(".container");
@@ -22,7 +23,7 @@ function exibirQuizzes (object) {
         userQuizzes.classList.add("escondido");
     }
 
-    console.log(listaIDs)
+    //console.log(listaIDs)
     if (listaIDs===null) {
         for(let i = 0; i < quizzServer.length; i++) {
             quizzes.innerHTML += `<div class="quizz" onclick="requisitarQuizz(${quizzServer[i].id});" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(${quizzServer[i].image});">
@@ -53,10 +54,22 @@ function exibirQuizzes (object) {
 }
     
     
-//}
 
- pegarQuizzes();
 
+pegarQuizzes();
+
+function exibirQuizzesUsuario () {
+    let quadroQuizzesUsuario = document.querySelector(".quizzesDoUsuario");
+    quadroQuizzesUsuario.innerHTML = "";
+    for(let i = 0; i < listaIDs.length; i++) {
+        quadroQuizzesUsuario.innerHTML += `<div class="quizz" onclick="requisitarQuizz(${listaIDs[i].id});" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(${listaIDs[i].image});">
+        <div class="nomeQuizz">${listaIDs[i].title}</div>
+        </div>`
+
+    }
+}
+
+exibirQuizzesUsuario();
 
 
 function msgErro () {
@@ -423,6 +436,7 @@ function voltarPaginaQuizzes() {
 function renderizarNiveis (){
     let niveis = document.querySelector(".pagNiveis");
     niveis.innerHTML = "";
+    //qtdNiveisCriarQuizz = 5;
     for (let i = 0; i < qtdNiveisCriarQuizz; i++) {
         niveis.innerHTML += 
         `<div class="niveis">
@@ -519,7 +533,7 @@ function finalizarQuizz () {
           }
       }
 
-    //console.log(objQuizz);
+    console.log(objQuizz);
     const promise = axios.post("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes", objQuizz);
     //console.log(promise);
     promise.then(mostrarSucesso);
