@@ -76,7 +76,7 @@ function exibirQuizzes (object) {
     
 
 
-//pegarQuizzes();
+pegarQuizzes();
 
 function exibirQuizzesUsuario () {
     let quadroQuizzesUsuario = document.querySelector(".quizzesDoUsuario");
