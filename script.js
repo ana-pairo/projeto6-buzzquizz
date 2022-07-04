@@ -25,6 +25,7 @@ function exibirQuizzes (object) {
             for(let j = 0; j < listaIDs.length; j++) {
                 if(quizzServer[i].id === listaIDs[j].id) {            
                     exibirQuizzesUsuario();
+                   // quizzes.innerHTML = "";
                     
                 } else {                    
                     quizzes.innerHTML += `<div class="quizz" onclick="requisitarQuizz(${quizzServer[i].id});" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(${quizzServer[i].image});">
