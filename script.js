@@ -21,9 +21,12 @@ function exibirQuizzes (object) {
     container.classList.remove("escondido");
 
     for(let i = 0; i < quizzServer.length; i++) {
-        if (listaIDs!== null) {
+        if (listaIDs.length !== 0) {
             for(let j = 0; j < listaIDs.length; j++) {
-                if(quizzServer[i].id !== listaIDs[j].id) {            
+                if(quizzServer[i].id === listaIDs[j].id) {            
+                    exibirQuizzesUsuario();
+                    
+                } else {                    
                     quizzes.innerHTML += `<div class="quizz" onclick="requisitarQuizz(${quizzServer[i].id});" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(${quizzServer[i].image});">
                     <div class="nomeQuizz">${quizzServer[i].title}</div>
                     </div>`;
@@ -84,12 +87,11 @@ function exibirQuizzesUsuario () {
     for(let i = 0; i < listaIDs.length; i++) {
         quadroQuizzesUsuario.innerHTML += `<div class="quizz" onclick="requisitarQuizz(${listaIDs[i].id});" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(${listaIDs[i].image});">
         <div class="nomeQuizz">${listaIDs[i].title}</div>
-        </div>`
-
+        </div>`;
     }
 }
 
-exibirQuizzesUsuario();
+
 
 
 function msgErro () {
@@ -456,7 +458,6 @@ function voltarPaginaQuizzes() {
 function renderizarNiveis (){
     let niveis = document.querySelector(".pagNiveis");
     niveis.innerHTML = "";
-    qtdNiveisCriarQuizz = 5;
     for (let i = 0; i < qtdNiveisCriarQuizz; i++) {
         niveis.innerHTML += 
         `<div class="niveis">
@@ -571,11 +572,11 @@ function mostrarSucesso (resp) {
     document.querySelector(".telaSucesso").innerHTML = "";
     document.querySelector(".telaSucesso").innerHTML = `
     <div class="sucessoTitulo">Seu quizz está pronto!</div>
-    <div class="novoQuizz" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(${urlCriarQuizz});" onclick="acessarQuizz()">
-        <div class="nomeQuizz" onclick="acessarQuizz()">${tituloCriarQuizz}</div>
+    <div class="novoQuizz" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(${urlCriarQuizz});" onclick="requisitarQuizz(${resp.data.id});">
+        <div class="nomeQuizz" onclick="requisitarQuizz(${resp.data.id});">${tituloCriarQuizz}</div>
     </div> 
     <div class="botoes">
-        <input type="button" class="botaoAcessarQuizz" value="Acessar Quizz" onclick="acessarQuizz()">
+        <input type="button" class="botaoAcessarQuizz" value="Acessar Quizz" onclick="requisitarQuizz(${resp.data.id});">
         <input type="button" class="botaoHome" value="Voltar pra home" onclick="voltarHome()">
     </div>`;
 
