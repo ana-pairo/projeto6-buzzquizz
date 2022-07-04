@@ -19,30 +19,37 @@ function exibirQuizzes (object) {
     let container = document.querySelector(".container");
     quizzes.innerHTML = "";
     container.classList.remove("escondido");
-
+       
     for(let i = 0; i < quizzServer.length; i++) {
-        if (listaIDs.length !== 0) {
-            for(let j = 0; j < listaIDs.length; j++) {
-                if(quizzServer[i].id === listaIDs[j].id) {            
-                    exibirQuizzesUsuario();
-                   // quizzes.innerHTML = "";
-                    
-                } else {                    
-                    quizzes.innerHTML += `<div class="quizz" onclick="requisitarQuizz(${quizzServer[i].id});" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(${quizzServer[i].image});">
-                    <div class="nomeQuizz">${quizzServer[i].title}</div>
-                    </div>`;
-                }
-            }
+         if (listaIDs !== null) {
+             for(let j = 0; j < listaIDs.length; j++) {
+                 if(quizzServer[i].id === listaIDs[j].id) {            
+                     exibirQuizzesUsuario();
+                                       
+                 } else {                    
+                     quizzes.innerHTML += `<div class="quizz" onclick="requisitarQuizz(${quizzServer[i].id});" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(${quizzServer[i].image});">
+                     <div class="nomeQuizz">${quizzServer[i].title}</div>
+                     </div>`;
+                     console.log('teste');
+                 }
+             }
+         } else {
+            quizzes.innerHTML += 
+            `<div class="quizz" onclick="requisitarQuizz(${quizzServer[i].id});" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(${quizzServer[i].image});">
+             <div class="nomeQuizz">${quizzServer[i].title}</div>
+             </div>`;
+         }
         }
-        
-        if(listaIDs === null) {
-            quizzes.innerHTML += `<div class="quizz" onclick="requisitarQuizz(${quizzServer[i].id});" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(${quizzServer[i].image});">
-            <div class="nomeQuizz">${quizzServer[i].title}</div>
-            </div>`;
-        } 
-          
     }
-}
+        
+    //     if(listaIDs === null) {
+    //         quizzes.innerHTML += `<div class="quizz" onclick="requisitarQuizz(${quizzServer[i].id});" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(${quizzServer[i].image});">
+    //         <div class="nomeQuizz">${quizzServer[i].title}</div>
+    //         </div>`;
+    //     } 
+          
+    // }
+
     // if (localStorage.getItem("id")!=='[]' && localStorage.length > 0){
     //     userQuizzes.classList.add("escondido");
     // }
