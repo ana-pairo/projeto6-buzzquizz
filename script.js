@@ -580,11 +580,11 @@ function mostrarSucesso (resp) {
     document.querySelector(".telaSucesso").innerHTML = "";
     document.querySelector(".telaSucesso").innerHTML = `
     <div class="sucessoTitulo">Seu quizz está pronto!</div>
-    <div class="novoQuizz" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(${urlCriarQuizz});" onclick="requisitarQuizz(${resp.data.id});">
+    <div class="novoQuizz" style="background-image: linear-gradient( to bottom, rgba(255,0,0,0), rgba(0,0,0,1)), url(${urlCriarQuizz});" onclick="requisitarQuizz(${resp.data.id});esconderTelaSucesso()">
         <div class="nomeQuizz" onclick="requisitarQuizz(${resp.data.id});">${tituloCriarQuizz}</div>
     </div> 
     <div class="botoes">
-        <input type="button" class="botaoAcessarQuizz" value="Acessar Quizz" onclick="requisitarQuizz(${resp.data.id});">
+        <input type="button" class="botaoAcessarQuizz" value="Acessar Quizz" onclick="requisitarQuizz(${resp.data.id}); esconderTelaSucesso()">
         <input type="button" class="botaoHome" value="Voltar pra home" onclick="voltarHome()">
     </div>`;
 
@@ -616,6 +616,9 @@ function acessarQuizz () {
     quizzPage.classList.remove("escondido");
 }
 
+function esconderTelaSucesso () {
+    document.querySelector(".telaSucesso").classList.add("escondido");
+}
 
 
 //BOTÃO CRIAR QUIZZ
