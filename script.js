@@ -161,7 +161,7 @@ function prosseguirCriarPerguntas(){
     }
 }
 
-/*TELA 2 CRIAÇÃO DE QUIZZES*/ 
+// TELA 2 CRIAÇÃO DE QUIZZES
 
 function abrirCriarPerguntasQuizz(){
     
