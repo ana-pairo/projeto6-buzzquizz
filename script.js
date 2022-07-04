@@ -456,7 +456,7 @@ function voltarPaginaQuizzes() {
 function renderizarNiveis (){
     let niveis = document.querySelector(".pagNiveis");
     niveis.innerHTML = "";
-    //qtdNiveisCriarQuizz = 5;
+    qtdNiveisCriarQuizz = 5;
     for (let i = 0; i < qtdNiveisCriarQuizz; i++) {
         niveis.innerHTML += 
         `<div class="niveis">
@@ -484,6 +484,7 @@ function maximizarNivel(elemento){
         document.querySelector(".nivelMinimizado.escondido").classList.remove("escondido");
     }
     elemento.parentElement.parentElement.firstElementChild.classList.remove("escondido");
+    elemento.parentElement.parentElement.firstElementChild.scrollIntoView({block:"center", behavior: "smooth"});
     elemento.parentElement.classList.add("escondido");
 
 }

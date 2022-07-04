@@ -100,7 +100,7 @@
 
 }
 
-.comQuizzUsuario {
+.comQuizzUsuario, .todosOsQuizzes {
     display: flex;
     flex-direction: column;
     width: 1000px;
@@ -110,7 +110,7 @@
     margin-bottom: 0;
 }
 
-.seusQuizzes {
+.seusQuizzes, .titulo {
     width: 250px;
     font-style: normal;
     font-weight: 700;
@@ -273,6 +273,7 @@
     width: 565px;
     border: 1px solid #d1d1d1;
     border-radius: 5px;
+    margin: 15px;
 }
 
 input::placeholder {
@@ -724,9 +725,15 @@ body{
         
     }
     
-    .quadroQuizzes, .quizzesUsuario {
-        width: 340px;
-       
+    .quadroQuizzes, .comQuizzUsuario, .quizzesDoUsuario {
+        width: 100%;
+    }
+
+    .quizz {
+        width: 100%;
+    }
+    .container {
+        width: 100%;
     }
 
     /* TELA 2 */
